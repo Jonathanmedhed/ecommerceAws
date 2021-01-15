@@ -42,7 +42,7 @@ export const sendEmail = (email, subject, text) => async (dispatch) => {
 		} else if (message === connectionError || message === networkError) {
 			dispatch({
 				type: SEND_EMAIL_FAIL,
-				payload: 'Revise su conexión a internet e intente de nuevo',
+				payload: message,
 			})
 		} else {
 			dispatch({
