@@ -34,6 +34,11 @@ export const sendEmail = (email, subject, text) => async (dispatch) => {
 		})
 	} catch (error) {
 		const message = error.response && error.response.data.message ? error.response.data.message : error.message
+		dispatch({
+			type: SEND_EMAIL_FAIL,
+			payload: message,
+		})
+		/**
 		if (message === 'Request failed with status code 500') {
 			dispatch({
 				type: SEND_EMAIL_FAIL,
@@ -50,5 +55,6 @@ export const sendEmail = (email, subject, text) => async (dispatch) => {
 				payload: message,
 			})
 		}
+		 */
 	}
 }
