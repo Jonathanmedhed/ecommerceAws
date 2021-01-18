@@ -14,7 +14,7 @@ import PriceSection from '../components/sections/PriceSection'
 import TextGif from '../components/sections/TextGif'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
-import { APP_NAME } from '../../config'
+import { APP_NAME } from '../config'
 
 const Index = () => {
 	let infoRef = createRef()
