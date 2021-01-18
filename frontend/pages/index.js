@@ -14,6 +14,7 @@ import PriceSection from '../components/sections/PriceSection'
 import TextGif from '../components/sections/TextGif'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import { APP_NAME } from '../../config'
 
 const Index = () => {
 	let infoRef = createRef()
@@ -36,8 +37,27 @@ const Index = () => {
 		}
 	}
 
+	const head = () => (
+		<Head>
+			<title>{APP_NAME} | Páginas Web</title>
+			<meta name="description" content={'Creamos todo tipo de páginas web para su negocio'} />
+			<link rel="canonical" href={`https://heddrichitsoluciones.online/`} />
+			<meta property="og:title" content={`${APP_NAME} | Páginas Web`} />
+			<meta property="og:description" content={'Creamos todo tipo de páginas web para su negocio'} />
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content={`https://heddrichitsoluciones.online/`} />
+			<meta property="og:site_name" content={`${APP_NAME}`} />
+
+			<meta property="og:image" content={``} />
+			<meta property="og:image:secure_url" ccontent={`../static/images/phone.png`} />
+			<meta property="og:image:type" content="image/png" />
+			{/**<meta property="fb:app_id" content={`${FB_APP_ID}`} />*/}
+		</Head>
+	)
+
 	return (
 		<>
+			{head()}
 			<Provider store={store}>
 				<Header goTo={goTo} />
 				<body className="body">
