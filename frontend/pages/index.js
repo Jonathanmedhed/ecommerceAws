@@ -15,6 +15,7 @@ import TextGif from '../components/sections/TextGif'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import { APP_NAME } from '../config'
+import Head from 'next/head'
 
 const Index = () => {
 	let infoRef = createRef()
