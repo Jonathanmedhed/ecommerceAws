@@ -41,6 +41,7 @@ const Index = () => {
 	const head = () => (
 		<Head>
 			<title>{APP_NAME} | Páginas Web</title>
+			<link rel="shortcut icon" href="/static/logo-round.jpg" />
 			<meta name="description" content={'Creamos todo tipo de páginas web para su negocio'} />
 			<link rel="canonical" href={`https://heddrichitsoluciones.online/`} />
 			<meta property="og:title" content={`${APP_NAME} | Páginas Web`} />
