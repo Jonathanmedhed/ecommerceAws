@@ -119,7 +119,7 @@ export const approveOrder = (order) => async (dispatch, getState) => {
 
 		const { data, status } = await axios.put(`${API}/orders/${order._id}/approve`, {}, config)
 
-		const { emailText, emailHtml } = generateEmail(order, shop, 'aprobada')
+		const { emailText, emailHtml } = generateEmail(data, shop, 'aprobada')
 
 		if (status === 200) {
 			await dispatch(
