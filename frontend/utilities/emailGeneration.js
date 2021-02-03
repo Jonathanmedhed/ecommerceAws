@@ -45,7 +45,7 @@ const getMoneyInfo = (order, toAdmin, reason) => {
 		? ''
 		: order.paymentMethod === 'Efectivo'
 		? '\nRecuerde tener el dinero en las denominaciones indicadas para cancelar su pedido\n'
-		: reason === 'aprobada'
+		: reason !== 'aprobada'
 		? 'Verificaremos la referencia en las próximas horas y le enviaremos un correo con la confirmación'
 		: ''
 }
