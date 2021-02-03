@@ -40,12 +40,12 @@ const getDeliveryInfo = (order) => {
 	return { deliveryPart, deliveryPartHtml }
 }
 
-const getMoneyInfo = (order, toAdmin) => {
+const getMoneyInfo = (order, toAdmin, reason) => {
 	return toAdmin
 		? ''
 		: order.paymentMethod === 'Efectivo'
 		? '\nRecuerde tener el dinero en las denominaciones indicadas para cancelar su pedido\n'
-		: !order.isApproved
+		: reason === 'aprobada'
 		? 'Verificaremos la referencia en las próximas horas y le enviaremos un correo con la confirmación'
 		: ''
 }
@@ -185,7 +185,7 @@ export const generateEmail = (order, shop, reason, toAdmin) => {
 
 		let { deliveryPart, deliveryPartHtml } = getDeliveryInfo(order)
 
-		let moneyPart = getMoneyInfo(order, toAdmin)
+		let moneyPart = getMoneyInfo(order, toAdmin, reason)
 
 		let shippingInfo = getShippingInfo(order)
 
