@@ -4,6 +4,7 @@ import CalendarForm from '../CalendarForm'
 import PaymentSubmitMessages from './PaymentSubmitMessages'
 import PaymentResultContainer from './PaymentResultContainer'
 import BillsForm from '../BillsForm'
+import LoginMessage from '../LoginMessage'
 
 const CashPaymentComponent = ({
 	order,
@@ -39,6 +40,19 @@ const CashPaymentComponent = ({
 				</span>
 			</div>
 		</p>
+	)
+
+	const loggedInInfo = () => (
+		<>
+			{!order.isPaid && !order.isSetAside && !isAdmin && isOwner ? (
+				<div className="form-group">
+					<h5>Puedes continuar con esta operación luego, accediendo en 'Mis Ordenes'</h5>
+					{order.paymentMethod === 'Pago Movil' ? <h5>(Precios en Bs podrían aumentar)</h5> : <></>}
+				</div>
+			) : (
+				!order.isPaid && !order.isSetAside && !isAdmin && !isOwner && <LoginMessage order={order} />
+			)}
+		</>
 	)
 
 	return (
@@ -98,6 +112,7 @@ const CashPaymentComponent = ({
 								<button type="submit" className="btn btn-primary">
 									Enviar
 								</button>
+								{loggedInInfo()}
 							</form>
 						)}
 					</>
