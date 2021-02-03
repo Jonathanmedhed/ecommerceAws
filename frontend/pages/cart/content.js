@@ -61,6 +61,7 @@ const CartScreen = () => {
 							removeFromCartHandler={removeFromCartHandler}
 						/>
 						<CheckOutBox
+							shop={shop}
 							cart={cart}
 							cartItems={cartItems}
 							changeCurrency={changeCurrency}

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { formatCurrency, numberWithDots } from '../../utilities/utilities'
 
-const CheckOutBox = ({ cart, cartItems, changeCurrency, checkoutHandler }) => {
+const CheckOutBox = ({ shop, cart, cartItems, changeCurrency, checkoutHandler }) => {
 	const totalDiscount = () => (
 		<>
 			{cart.discountTotal > 0 && (
