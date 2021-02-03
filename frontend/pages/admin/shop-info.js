@@ -287,6 +287,9 @@ const ShopInfoScreen = () => {
 	const nameAndLogoForm = () => (
 		<>
 			<div className="form-group">
+				<p className="warning-msg">Logo y nombre a mostrar en los correos a enviar</p>
+			</div>
+			<div className="form-group">
 				<label>Nombre de Tienda</label>
 				<input
 					type="text"
