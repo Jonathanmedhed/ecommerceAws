@@ -287,7 +287,7 @@ const ShopInfoScreen = () => {
 	const nameAndLogoForm = () => (
 		<>
 			<div className="form-group">
-				<p className="warning-msg">Logo y nombre a mostrar en los correos a enviar</p>
+				<p className="warning-msg">Logo y nombre para mostrar en los correos a enviar</p>
 			</div>
 			<div className="form-group">
 				<label>Nombre de Tienda</label>
@@ -413,13 +413,13 @@ const ShopInfoScreen = () => {
 		<>
 			<div className="form-group">
 				<label>Días para retirar producto</label>
-				<h5>Se recomienda sumar +2 días si su tienda no abre los fines de semana</h5>
+				<p className="warning-msg">Se recomienda sumar +2 días si su tienda no abre los fines de semana</p>
 				<input type="number" name="waitTime" value={waitTime} min={0} onChange={(e) => onChange(e)}></input>
 			</div>
 
 			<div className="form-group">
 				<label>Días para preparar producto</label>
-				<h5>Dias necesarios para preparar el producto para su retiro/envío</h5>
+				<p className="warning-msg">Dias necesarios para preparar el producto para su retiro/envío</p>
 				<input
 					type="number"
 					name="waitTimeDelivery"
