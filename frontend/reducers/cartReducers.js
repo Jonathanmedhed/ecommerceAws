@@ -75,6 +75,12 @@ export const cartReducer = (
 			return {
 				...state,
 				cartItems: [],
+				shippingAddress: {},
+				paymentMethod: {},
+				discountTotal: 0,
+				freeAmount: 0,
+				subTotal: 0,
+				total: 0,
 			}
 		default:
 			return state

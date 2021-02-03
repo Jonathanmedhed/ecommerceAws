@@ -98,13 +98,17 @@ const PlaceOrderScreen = () => {
 
 							<CheckOutPlaceOrderBox cart={cart} shop={shop} />
 
-							<button
-								className="btn btn-primary"
-								disabled={cart.cartItems === 0}
-								onClick={placeOrderHandler}
-							>
-								Realizar Pedido
-							</button>
+							{cart.cartItems && cart.cartItems.length > 0 ? (
+								<button
+									className="btn btn-primary"
+									disabled={cart.cartItems === 0}
+									onClick={placeOrderHandler}
+								>
+									Realizar Pedido
+								</button>
+							) : (
+								<></>
+							)}
 						</div>
 					</div>
 				</div>
