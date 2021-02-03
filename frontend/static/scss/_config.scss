@@ -1,9 +1,9 @@
 /** Colors */
 /** Main Color Scheme */
-$primary-color: #296EB4;
+$primary-color: #0e4263;
 $dark-color: #0b212e;
 $light-color: #256584;
-$gray-darker-color: rgb(124, 124, 124);
+$lighter-color: #bbe8ff;
 $gray-dark-color: rgb(151, 151, 151);
 $gray-light-color: rgb(214, 214, 214);
 $gray-color: rgb(192, 192, 192);
@@ -51,6 +51,18 @@ $sizeamounts: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
   .f-#{$size} {
     font-size: #{$size}rem;
   }
+}
+
+.f-three-qters {
+  font-size: 0.75rem;
+}
+
+.f-half {
+  font-size: 0.5rem;
+}
+
+.f-qter {
+  font-size: 0.25rem;
 }
 
 /** Margin & Padding */
@@ -185,6 +197,77 @@ $spaceamounts: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 // Right margin
 .mr-qter {
   margin: 0 0.2rem 0 0;
+}
+
+// All around  auto padding
+.p-auto {
+  padding: auto;
+}
+// Vertical auto padding
+.py-auto {
+  padding: auto 0;
+}
+// Horizontal auto padding
+.px-auto {
+  padding: 0 auto;
+}
+
+/* 0.5rem padding*/
+.p-half {
+  padding: 0.5rem;
+}
+// Vertical padding
+.py-half {
+  padding: 0.5rem 0;
+}
+// Horizontal padding
+.px-half {
+  padding: 0 0.5rem;
+}
+// Top padding
+.pt-half {
+  padding: 0.5rem 0 0 0;
+}
+// Bottom padding
+.pb-half {
+  padding: 0 0 0.5rem 0;
+}
+// Left padding
+.pl-half {
+  padding: 0 0 0 0.5rem;
+}
+// Right padding
+.pr-half {
+  padding: 0 0.5rem 0 0;
+}
+
+/* 0.2rem padding*/
+.p-qter {
+  padding: 0.2rem;
+}
+// Vertical padding
+.py-qter {
+  padding: 0.2rem 0;
+}
+// Horizontal padding
+.px-qter {
+  padding: 0 0.2rem;
+}
+// Top padding
+.pt-qter {
+  padding: 0.2rem 0 0 0;
+}
+// Bottom padding
+.pb-qter {
+  padding: 0 0 0.2rem 0;
+}
+// Left padding
+.pl-qter {
+  padding: 0 0 0 0.2rem;
+}
+// Right padding
+.pr-qter {
+  padding: 0 0.2rem 0 0;
 }
 
 /** Max width */

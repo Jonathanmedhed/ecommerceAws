@@ -1,80 +1,123 @@
-import { createRef } from 'react'
-import { Provider } from 'react-redux'
-import store from '../store'
-import 'primereact/resources/primereact.min.css'
-import 'primeicons/primeicons.css'
-import Header from '../components/Header'
-import ImgText from '../components/sections/ImgText'
-import IconCards from '../components/sections/IconCards'
-import TextImg from '../components/sections/TextImg'
-import ImgTextIcons from '../components/sections/ImgTextIcons'
-import CarouselImgs from '../components/sections/CarouselImgs'
-import TextOnly from '../components/sections/TextOnly'
-import PriceSection from '../components/sections/PriceSection'
-import TextGif from '../components/sections/TextGif'
-import Contact from '../components/Contact'
-import Footer from '../components/Footer'
-import { APP_NAME } from '../config'
-import Head from 'next/head'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Link from 'next/link'
+// components
+import HtmlHeader from '../components/html-header/HtmlHeader'
+import Cookie from '../components/cookies/Cookie'
+import Loader from '../components/loader/Loader'
+import Message from '../components/alerts/Message'
+import SectionImgBG from '../components/sections/SectionImgBG'
+import SectionTextOnly from '../components/sections/SectionTextOnly'
+import SectionImgAndText from '../components/sections/SectionImgAndText'
+import SeoContent from '../components/seo-content/SeoContent'
+// actions
+import { shopDetails as getShopDetails } from '../actions/shopActions'
+import { listProducts } from '../actions/productActions'
+// constants
+import { APP_NAME, DOMAIN } from '../config'
+import Error from '../components/error/Error'
 
 const Index = () => {
-	let infoRef = createRef()
-	let priceRef = createRef()
-	let contactRef = createRef()
+	const [loaded, setLoaded] = useState(false)
 
-	const goTo = (option) => {
-		switch (option) {
-			case 'prices':
-				priceRef.current.scrollIntoView({ behavior: 'smooth' })
-				break
-			case 'info':
-				infoRef.current.scrollIntoView({ behavior: 'smooth' })
-				break
-			case 'contact':
-				contactRef.current.scrollIntoView({ behavior: 'smooth' })
-				break
-			default:
-				break
+	const shopDetails = useSelector((state) => state.shopDetails)
+	const { shop, loading, error } = shopDetails
+
+	const userLogin = useSelector((state) => state.userLogin)
+	const { userInfo } = userLogin
+
+	const productList = useSelector((state) => state.productList)
+	const { loading: loadingProducts, allProducts, error: errorProducts } = productList
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		if (!shop || !shop.email) {
+			dispatch(getShopDetails())
 		}
-	}
+		if (!allProducts || allProducts.length == 0) {
+			dispatch(listProducts('', '1'))
+		}
+	}, [shop, allProducts, dispatch])
 
-	const head = () => (
-		<Head>
-			<title>{APP_NAME} | Páginas Web</title>
-			<link rel="shortcut icon" href="/static/logo-round.jpg" />
-			<meta name="description" content={'Creamos todo tipo de páginas web para su negocio'} />
-			<link rel="canonical" href={`https://heddrichitsoluciones.online/`} />
-			<meta property="og:title" content={`${APP_NAME} | Páginas Web`} />
-			<meta property="og:description" content={'Creamos todo tipo de páginas web para su negocio'} />
-			<meta property="og:type" content="website" />
-			<meta property="og:url" content={`https://heddrichitsoluciones.online/`} />
-			<meta property="og:site_name" content={`${APP_NAME}`} />
+	const headTemplate = () => (
+		<HtmlHeader
+			title={APP_NAME}
+			shortcutIcon={'/static/logo-round.jpg'}
+			description={'Ultimos productos tecnologicos en Venezuela'}
+			link={`${DOMAIN}`}
+			ogTitle={`${APP_NAME} | Páginas Web`}
+			ogDescription={'Ultimos productos tecnologicos en Venezuela'}
+			ogType={'website'}
+			ogUrl={`${DOMAIN}`}
+			ogSiteName={`${APP_NAME}`}
+			ogImg={``}
+			ogImgSecureUrl={`../static/images/phone.png`}
+			ogImgType={'image/png'}
+			//fbId={}
+		/>
+	)
 
-			<meta property="og:image" content={``} />
-			<meta property="og:image:secure_url" ccontent={`../static/images/phone.png`} />
-			<meta property="og:image:type" content="image/png" />
-			{/**<meta property="fb:app_id" content={`${FB_APP_ID}`} />*/}
-		</Head>
+	const jumboComponent = (shop) => (
+		<div className="home" style={loaded ? {} : { display: 'none' }}>
+			<div className="content">
+				<img
+					onLoad={() => setLoaded(true)}
+					className="home-image"
+					src={shop && shop.image ? shop.image : require(`../static/images/home.jpg`)}
+					alt="home"
+				></img>
+				<div className="message">
+					<h1 className="title">{shop && shop.title ? shop.title : shop && shop.name && shop.name}</h1>
+					{shop && shop.message && <p className="text">{shop.message}</p>}
+					<div className="options">
+						<Link href="/product-selection">
+							<span className="btn btn-light">Productos</span>
+						</Link>
+						{!userInfo && (
+							<Link href="/login">
+								<span className="btn btn-primary">Ingresar</span>
+							</Link>
+						)}
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+
+	const sections = (shop) => (
+		<>
+			{shop.sections &&
+				shop.sections.map((section) => (
+					<div className="home-section" style={loaded ? {} : { display: 'none' }}>
+						<SectionImgBG section={section} />
+						<SectionTextOnly section={section} />
+						<SectionImgAndText section={section} item={shop} />
+					</div>
+				))}
+		</>
 	)
 
 	return (
 		<>
-			{head()}
-			<Provider store={store}>
-				<Header goTo={goTo} />
-				<body className="body">
-					<IconCards infoRef={infoRef} />
-					<CarouselImgs />
-					<TextImg />
-					<ImgTextIcons />
-					<ImgText />
-					<TextOnly />
-					<PriceSection priceRef={priceRef} />
-					<TextGif />
-					<Contact contactRef={contactRef} />
-				</body>
-				<Footer />
-			</Provider>
+			{headTemplate()}
+			<>
+				<Cookie />
+				{loading && loadingProducts ? (
+					<Loader absolute={true} />
+				) : error || errorProducts ? (
+					<Error />
+				) : (
+					shop &&
+					allProducts && (
+						<>
+							{jumboComponent(shop)}
+							<SeoContent products={allProducts} shop={shop} />
+							{sections(shop)}
+						</>
+					)
+				)}
+			</>
 		</>
 	)
 }

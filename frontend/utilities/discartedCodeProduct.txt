@@ -1,0 +1,92 @@
+/**
+	const userLogin = useSelector((state) => state.userLogin)
+	const { userInfo } = userLogin
+
+	const productReviewCreate = useSelector((state) => state.productReviewCreate)
+	const {
+		success: successProductReview,
+		loading: loadingProductReview,
+		error: errorProductReview,
+	} = productReviewCreate
+
+	    (use effect)
+		if (successProductReview) {
+			setRating(0)
+			setComment('')
+			dispatch(listProductDetails(query.id))
+			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+		}
+	
+	const submitHandler = (e) => {
+		e.preventDefault()
+		dispatch(
+			createProductReview(query.id, {
+				rating,
+				comment,
+			})
+		)
+	}
+
+	Dropdown qty
+	<select name="qty" value={qty} onChange={(e) => setQty(e.target.value)}>
+		{[...Array(product.countInStock).keys()].map((x) => (
+			<option key={x + 1} value={x + 1}>
+				{x + 1}
+			</option>
+		))}
+	</select>
+
+	// Review component
+		<div className="reviews">
+		{product.reviews.map((review) => (
+			<div className="review-item" key={review._id}>
+				<div className="user">{review.name}</div>
+				<div className="stars">
+					<Rating value={review.rating} />
+				</div>
+				<p className="date">{review.createdAt.substring(0, 10)}</p>
+				<p className="comment">{review.comment}</p>
+			</div>
+		))}
+	</div>
+	{product.reviews.length === 0 && <Message severity="warn" text={'Sin Calificaciones'} />}
+	<div className="review-section">
+		<div className="review-form">
+			{successProductReview && <Message severity="success" text={'Gracias por su aporte'} />}
+			{loadingProductReview && <Loader />}
+			{errorProductReview && <Message severity="error" text={errorProductReview} />}
+			{userInfo ? (
+				<form onSubmit={submitHandler}>
+					<select value={rating} onChange={(e) => setRating(e.target.value)}>
+						<option value="">Calificar...</option>
+						<option value="1">1 - Malo</option>
+						<option value="2">2 - Decente</option>
+						<option value="3">3 - Bueno</option>
+						<option value="4">4 - Muy Bueno</option>
+						<option value="5">5 - Excelente</option>
+					</select>
+					<textarea
+						value={comment}
+						onChange={(e) => setComment(e.target.value)}
+					></textarea>
+					<button
+						disabled={loadingProductReview}
+						type="submit"
+						className="btn btn-primary"
+					>
+						Calificar
+					</button>
+				</form>
+			) : (
+				<Message
+					severity="error"
+					text={
+						<div>
+							<Link to="/login">Ingresa</Link> para calificar este producto{' '}
+						</div>
+					}
+				/>
+			)}
+		</div>
+	</div>
+	*/

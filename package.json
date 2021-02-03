@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
 		"server": "nodemon server",
 		"client": "npm run dev --prefix frontend",
@@ -14,12 +15,20 @@
 	"license": "ISC",
 	"dependencies": {
 		"@sendgrid/mail": "^7.4.2",
+		"aws-sdk": "^2.834.0",
+		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
 		"concurrently": "^5.3.0",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
+		"ejs": "^3.1.5",
 		"express": "^4.17.1",
+		"express-async-handler": "^1.1.4",
+		"jsonwebtoken": "^8.5.1",
+		"moment": "^2.29.1",
+		"mongoose": "^5.11.14",
 		"morgan": "^1.10.0",
+		"multer": "^1.4.2",
 		"nodemailer": "^6.4.17",
 		"nodemon": "^2.0.7"
 	}
