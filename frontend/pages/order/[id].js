@@ -128,7 +128,7 @@ const OrderScreen = ({ query }) => {
 			window.scrollTo(0, 0)
 		}
 		if (order) {
-			if (order.user && userInfo && userInfo._id === order.user) {
+			if (order.user && userInfo && userInfo._id === order.user._id) {
 				setIsOwner(true)
 			} else {
 				setIsOwner(false)
@@ -218,7 +218,7 @@ const OrderScreen = ({ query }) => {
 		<>
 			{order.user && !userInfo ? (
 				<>{loginOptions()}</>
-			) : order.user && userInfo && !userInfo.isAdmin && userInfo._id !== order.user ? (
+			) : order.user && userInfo && !userInfo.isAdmin && userInfo._id !== order.user._id ? (
 				<div className="access-options">
 					<p>Su cuenta no esta afiliada a esta orden</p>
 				</div>
