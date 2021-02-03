@@ -1,6 +1,5 @@
-import express from 'express'
-import nodemailer from 'nodemailer'
-import { protect } from '../middleware/authMiddleware.js'
+const express = require('express')
+const nodemailer = require('nodemailer')
 
 const router = express.Router()
 
@@ -48,4 +47,4 @@ router.post(
 	}
 )
 
-export default router
+module.exports = router

@@ -1,13 +1,13 @@
-import asyncHandler from 'express-async-handler'
-import Order from '../models/orderModel.js'
-import Product from '../models/productModel.js'
-import Shop from '../models/shopModel.js'
-import User from '../models/userModel.js'
+const asyncHandler = require('express-async-handler')
+const Order = require('../models/orderModel')
+const Product = require('../models/productModel')
+const Shop = require('../models/shopModel')
+const User = require('../models/userModel')
 
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
-const addOrderItems = asyncHandler(async (req, res) => {
+exports.addOrderItems = asyncHandler(async (req, res) => {
 	const {
 		orderItems,
 		shippingAddress,
@@ -61,7 +61,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @desc    Create new order as a guest
 // @route   POST /api/orders/guest
 // @access  Private
-const addOrderItemsGuest = asyncHandler(async (req, res) => {
+exports.addOrderItemsGuest = asyncHandler(async (req, res) => {
 	const {
 		orderItems,
 		shippingAddress,
@@ -107,7 +107,7 @@ const addOrderItemsGuest = asyncHandler(async (req, res) => {
 // @desc    Get order by ID
 // @route   GET /api/orders/:id
 // @access  Private
-const getOrderById = asyncHandler(async (req, res) => {
+exports.getOrderById = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id).populate('user', 'name email')
 
 	if (order) {
@@ -121,7 +121,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @desc    Get order by ID as a guest
 // @route   GET /api/orders/:id/guest
 // @access  Private
-const getOrderByIdGuest = asyncHandler(async (req, res) => {
+exports.getOrderByIdGuest = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id)
 
 	if (order) {
@@ -135,7 +135,7 @@ const getOrderByIdGuest = asyncHandler(async (req, res) => {
 // @desc    Update order to approved
 // @route   PUT /api/orders/:id/approve
 // @access  Private
-const updateOrderToApproved = asyncHandler(async (req, res) => {
+exports.updateOrderToApproved = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id)
 
 	if (order) {
@@ -154,7 +154,7 @@ const updateOrderToApproved = asyncHandler(async (req, res) => {
 // @desc    Update order to paid
 // @route   PUT /api/orders/:id/pay
 // @access  Private
-const updateOrderToPaid = asyncHandler(async (req, res) => {
+exports.updateOrderToPaid = asyncHandler(async (req, res) => {
 	if (req.body.paymentReference) {
 		const orders = await Order.find({ paymentReference: req.body.paymentReference })
 
@@ -190,7 +190,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @desc    Update order to paid as a guest
 // @route   PUT /api/orders/:id/pay/guest
 // @access  Private
-const updateOrderToPaidGuest = asyncHandler(async (req, res) => {
+exports.updateOrderToPaidGuest = asyncHandler(async (req, res) => {
 	if (req.body.paymentReference) {
 		const orders = await Order.find({ paymentReference: req.body.paymentReference })
 
@@ -226,7 +226,7 @@ const updateOrderToPaidGuest = asyncHandler(async (req, res) => {
 // @desc    Update order to delivered
 // @route   PUT /api/orders/:id/deliver
 // @access  Private/Admin
-const updateOrderToDelivered = asyncHandler(async (req, res) => {
+exports.updateOrderToDelivered = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id)
 
 	if (order) {
@@ -245,7 +245,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 // @desc    Update order to canceled
 // @route   PUT /api/orders/:id/cancel
 // @access  Private/Admin
-const updateOrderToCanceled = asyncHandler(async (req, res) => {
+exports.updateOrderToCanceled = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id)
 
 	if (order) {
@@ -283,7 +283,7 @@ const updateOrderToCanceled = asyncHandler(async (req, res) => {
 // @desc    Update order to checked
 // @route   PUT /api/orders/:id/check
 // @access  Private/Admin
-const updateOrderToChecked = asyncHandler(async (req, res) => {
+exports.updateOrderToChecked = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id)
 
 	if (order) {
@@ -301,7 +301,7 @@ const updateOrderToChecked = asyncHandler(async (req, res) => {
 // @desc    Update order dollar value
 // @route   PUT /api/orders/:id/dollar
 // @access  Public
-const updateOrderDollar = asyncHandler(async (req, res) => {
+exports.updateOrderDollar = asyncHandler(async (req, res) => {
 	const order = await Order.findById(req.params.id)
 
 	const shops = await Shop.find({})
@@ -326,7 +326,7 @@ const updateOrderDollar = asyncHandler(async (req, res) => {
 // @desc    Get logged in user orders
 // @route   GET /api/orders/myorders
 // @access  Private
-const getMyOrders = asyncHandler(async (req, res) => {
+exports.getMyOrders = asyncHandler(async (req, res) => {
 	const orders = await Order.find({ user: req.user._id })
 	res.json(orders)
 })
@@ -334,24 +334,7 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @desc    Get all orders
 // @route   GET /api/orders
 // @access  Private/Admin
-const getOrders = asyncHandler(async (req, res) => {
+exports.getOrders = asyncHandler(async (req, res) => {
 	const orders = await Order.find({}).populate('user', 'id name')
 	res.json(orders)
 })
-
-export {
-	addOrderItems,
-	getOrderById,
-	updateOrderToApproved,
-	updateOrderToPaid,
-	updateOrderToDelivered,
-	updateOrderToCanceled,
-	updateOrderToChecked,
-	getMyOrders,
-	getOrders,
-	updateOrderDollar,
-	// guest
-	addOrderItemsGuest,
-	getOrderByIdGuest,
-	updateOrderToPaidGuest,
-}

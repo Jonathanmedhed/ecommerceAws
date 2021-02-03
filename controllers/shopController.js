@@ -1,10 +1,10 @@
-import asyncHandler from 'express-async-handler'
-import Shop from '../models/shopModel.js'
+const asyncHandler = require('express-async-handler')
+const Shop = require('../models/shopModel')
 
 // @desc    Create a shop
 // @route   POST /api/shop
 // @access  Private/Admin
-const createShop = asyncHandler(async (req, res) => {
+exports.createShop = asyncHandler(async (req, res) => {
 	const shops = await Shop.find({})
 
 	if (shops && shops.length > 0) {
@@ -56,7 +56,7 @@ const createShop = asyncHandler(async (req, res) => {
 // @desc    Get shop info
 // @route   GET /api/shop
 // @access  Public
-const getShopInfo = asyncHandler(async (req, res) => {
+exports.getShopInfo = asyncHandler(async (req, res) => {
 	const shops = await Shop.find({})
 	if (shops && shops.length > 0) {
 		res.json({
@@ -100,7 +100,7 @@ const getShopInfo = asyncHandler(async (req, res) => {
 // @desc    Update shop info
 // @route   PUT /api/shop
 // @access  Private/Admin
-const updateShopInfo = asyncHandler(async (req, res) => {
+exports.updateShopInfo = asyncHandler(async (req, res) => {
 	const shops = await Shop.find({})
 	if (shops && shops.length > 0) {
 		shops[0].address = req.body.address || shops[0].address
@@ -177,7 +177,7 @@ const updateShopInfo = asyncHandler(async (req, res) => {
 // @desc    Delete shop
 // @route   DELETE /api/shop/
 // @access  Private/Admin
-const deleteShop = asyncHandler(async (req, res) => {
+exports.deleteShop = asyncHandler(async (req, res) => {
 	const shops = await Shop.find({})
 
 	if (shops && shops.length > 0) {
@@ -188,5 +188,3 @@ const deleteShop = asyncHandler(async (req, res) => {
 		throw new Error('Tienda no encontrada')
 	}
 })
-
-export { createShop, getShopInfo, updateShopInfo, deleteShop }

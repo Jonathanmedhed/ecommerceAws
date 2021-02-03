@@ -1,7 +1,7 @@
-import path from 'path'
-import express from 'express'
-import multer from 'multer'
-import aws from 'aws-sdk'
+const path = require('path')
+const express = require('express')
+const multer = require('multer')
+const aws = require('aws-sdk')
 
 const router = express.Router()
 
@@ -66,4 +66,4 @@ router.get('/sign-s3', async (req, res) => {
 	})
 })
 
-export default router
+module.exports = router

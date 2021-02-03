@@ -1,17 +1,17 @@
-import express from 'express'
-import morgan from 'morgan'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-import connectDB from './config/db.js'
+const express = require('express')
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const dotenv = require('dotenv')
+const { notFound, errorHandler } = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
 
-import emailRoutes from './routes/emailRoutes.js'
-import productRoutes from './routes/productRoutes.js'
-import userRoutes from './routes/userRoutes.js'
-import orderRoutes from './routes/orderRoutes.js'
-import shopRoutes from './routes/shopRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
+const emailRoutes = require('./routes/emailRoutes')
+const productRoutes = require('./routes/productRoutes')
+const userRoutes = require('./routes/userRoutes')
+const orderRoutes = require('./routes/orderRoutes')
+const shopRoutes = require('./routes/shopRoutes')
+const uploadRoutes = require('./routes/uploadRoutes')
 
 dotenv.config()
 

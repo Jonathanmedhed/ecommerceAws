@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const shopSchema = mongoose.Schema(
 	{
@@ -122,6 +122,5 @@ const shopSchema = mongoose.Schema(
 	}
 )
 
-const Shop = mongoose.model('Shop', shopSchema)
+module.exports = mongoose.model('Shop', shopSchema)
 
-export default Shop

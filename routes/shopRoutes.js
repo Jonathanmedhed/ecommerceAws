@@ -1,7 +1,7 @@
-import express from 'express'
+const express = require('express')
 const router = express.Router()
-import { createShop, getShopInfo, updateShopInfo, deleteShop } from '../controllers/shopController.js'
-import { protect, admin } from '../middleware/authMiddleware.js'
+const { createShop, getShopInfo, updateShopInfo, deleteShop } = require('../controllers/shopController')
+const { protect, admin } = require('../middleware/authMiddleware')
 
 router
 	.route('/')
@@ -10,4 +10,4 @@ router
 	.delete(protect, admin, deleteShop)
 	.put(protect, admin, updateShopInfo)
 
-export default router
+module.exports = router

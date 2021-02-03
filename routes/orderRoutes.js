@@ -1,6 +1,6 @@
-import express from 'express'
+const express = require('express')
 const router = express.Router()
-import {
+const {
 	addOrderItems,
 	getOrderById,
 	updateOrderToApproved,
@@ -14,8 +14,8 @@ import {
 	getOrderByIdGuest,
 	updateOrderToPaidGuest,
 	updateOrderDollar,
-} from '../controllers/orderController.js'
-import { protect, admin } from '../middleware/authMiddleware.js'
+} = require('../controllers/orderController')
+const { protect, admin } = require('../middleware/authMiddleware')
 
 router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders)
 router.route('/guest').post(addOrderItemsGuest)
@@ -30,4 +30,4 @@ router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered)
 router.route('/:id/cancel').put(protect, admin, updateOrderToCanceled)
 router.route('/:id/check').put(protect, admin, updateOrderToChecked)
 
-export default router
+module.exports = router
