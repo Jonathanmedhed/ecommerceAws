@@ -3547,6 +3547,7 @@ Input group w/buttons Input group w/buttons Input group w/buttons
   .msg-item {
     display: flex;
     flex-direction: row;
+    max-width: 20rem;
     i {
       color: $success-color;
       font-size: 0.5rem;

@@ -6293,6 +6293,7 @@ Input group w/buttons Input group w/buttons Input group w/buttons
 .success-msg .msg-item {
   display: flex;
   flex-direction: row;
+  max-width: 20rem;
 }
 .success-msg .msg-item i {
   color: #28a745;

@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { DOMAIN } from '../config'
 
 const generateItemList = (order) => {
 	try {
@@ -13,7 +14,7 @@ const generateItemList = (order) => {
 			itemsStringHtml =
 				itemsStringHtml +
 				'\n' +
-				`<li><a href="http://ecommercespanish.herokuapp.com/product/${item.product}">${item.name}</a> <strong> x ${item.qty}</strong></li>`
+				`<li><a href="${DOMAIN}/product/${item.product}">${item.name}</a> <strong> x ${item.qty}</strong></li>`
 		})
 
 		return { itemsText: itemsString, itemsHtml: itemsStringHtml }
@@ -76,7 +77,7 @@ const textToSendUser = (shop, order, userName, deliveryPart, moneyPart, itemsTex
 		`Productos:` +
 		itemsText +
 		generalInfo +
-		`\n\nPara mas información siga el enlace: \nhttp://ecommercespanish.herokuapp.com/order/${order._id}\n` +
+		`\n\nPara mas información siga el enlace: \n${DOMAIN}/order/${order._id}\n` +
 		`\n\nEste es un correo automatizado. \nContáctenos en nuestro correo ${shop.email} si tiene alguna duda \nGracias por su compra \n\n` +
 		shop.name +
 		'\n' +
@@ -103,7 +104,7 @@ const textToSendAdmin = (order, deliveryPart, moneyPart, userName, itemsText) =>
 		'\n' +
 		`Productos:` +
 		itemsText +
-		`\n\nPara mas información siga el link: \nhttp://ecommercespanish.herokuapp.com/order/${order._id}\n` +
+		`\n\nPara mas información siga el link: \n${DOMAIN}/order/${order._id}\n` +
 		``
 	)
 }
@@ -120,9 +121,9 @@ const userNameIntro = (userName, toAdmin) => {
 }
 
 const moreOrderInfo = (order, toAdmin) => {
-	return `<p>Para mas información sobre ${
-		toAdmin ? 'la' : 'su'
-	} orden ingrese <a href='http://ecommercespanish.herokuapp.com/order/${order._id}'>aquí</a></p>`
+	return `<p>Para mas información sobre ${toAdmin ? 'la' : 'su'} orden ingrese <a href='${DOMAIN}/order/${
+		order._id
+	}'>aquí</a></p>`
 }
 
 const emailFooter = (shop) => {
