@@ -7797,6 +7797,52 @@ Select Buttons
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 45rem) {
+  .p-sidebar .p-sidebar-content .p-slidemenu-content {
+    max-height: 15rem;
+    min-height: 15rem;
+    max-width: 13rem;
+    min-width: 13rem;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0e4263 whitesmoke;
+  }
+  .p-sidebar .p-sidebar-content .p-slidemenu-content::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  .p-sidebar .p-sidebar-content .p-slidemenu-content::-webkit-scrollbar-track {
+    background: #dfdfdf;
+    border-radius: 0.2rem;
+  }
+  .p-sidebar .p-sidebar-content .p-slidemenu-content::-webkit-scrollbar-thumb {
+    background-color: #0e4263;
+    border-radius: 6px;
+    border: 1px solid whitesmoke;
+  }
+}
+@media (max-width: 22.5rem) {
+  .p-sidebar .p-sidebar-content .p-slidemenu-content {
+    max-height: 30rem;
+    min-height: 30rem;
+    max-width: 13rem;
+    min-width: 13rem;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0e4263 whitesmoke;
+  }
+  .p-sidebar .p-sidebar-content .p-slidemenu-content::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  .p-sidebar .p-sidebar-content .p-slidemenu-content::-webkit-scrollbar-track {
+    background: #dfdfdf;
+    border-radius: 0.2rem;
+  }
+  .p-sidebar .p-sidebar-content .p-slidemenu-content::-webkit-scrollbar-thumb {
+    background-color: #0e4263;
+    border-radius: 6px;
+    border: 1px solid whitesmoke;
+  }
+}
 .p-sidebar .p-sidebar-close-icon.pi.pi-times {
   font-size: 1.2rem;
   color: white;

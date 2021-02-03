@@ -5102,6 +5102,62 @@ Select Buttons
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
+    @media (max-width: 45rem) {
+      .p-slidemenu-content {
+        max-height: 15rem;
+        min-height: 15rem;
+        max-width: 13rem;
+        min-width: 13rem;
+        overflow: auto;
+
+        // Scrollbar
+        scrollbar-width: thin;
+        scrollbar-color: $primary-color $white-color;
+
+        &::-webkit-scrollbar {
+          width: 0.5rem;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: $white-dark-color;
+          border-radius: 0.2rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: $primary-color;
+          border-radius: 6px;
+          border: 1px solid $white-color;
+        }
+      }
+    }
+    @media (max-width: 22.5rem) {
+      .p-slidemenu-content {
+        max-height: 30rem;
+        min-height: 30rem;
+        max-width: 13rem;
+        min-width: 13rem;
+        overflow: auto;
+
+        // Scrollbar
+        scrollbar-width: thin;
+        scrollbar-color: $primary-color $white-color;
+
+        &::-webkit-scrollbar {
+          width: 0.5rem;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: $white-dark-color;
+          border-radius: 0.2rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: $primary-color;
+          border-radius: 6px;
+          border: 1px solid $white-color;
+        }
+      }
+    }
   }
   // exit icon
   .p-sidebar-close-icon.pi.pi-times {
