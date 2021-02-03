@@ -35,7 +35,19 @@ import { removeAlert, setAlert } from './alertActions'
 
 export const login = (email, password) => async (dispatch) => {
 	try {
-		if (validateEmail(email)) {
+		if (!password) {
+			dispatch({
+				type: USER_LOGIN_FAIL,
+				payload: 'Contraseña requerida',
+			})
+			dispatch(setAlert('Contraseña requerida', 'error'))
+		} else if (!email) {
+			dispatch({
+				type: USER_LOGIN_FAIL,
+				payload: 'Email requerido',
+			})
+			dispatch(setAlert('Email requerido', 'error'))
+		} else if (validateEmail(email)) {
 			dispatch({
 				type: USER_LOGIN_REQUEST,
 			})
@@ -83,12 +95,18 @@ export const logout = () => (dispatch) => {
 
 export const register = (name, email, password, confirmPassword) => async (dispatch) => {
 	try {
-		if (password !== confirmPassword) {
+		if (!password || !confirmPassword) {
 			dispatch({
 				type: USER_REGISTER_FAIL,
-				payload: 'Contraseñas no iguales',
+				payload: 'Contraseñas requeridas',
 			})
-			dispatch(setAlert('Contraseñas no iguales', 'error'))
+			dispatch(setAlert('Contraseñas requeridas', 'error'))
+		} else if (!password) {
+			dispatch({
+				type: USER_REGISTER_FAIL,
+				payload: 'Correo Invalido',
+			})
+			dispatch(setAlert('Correo Invalido', 'error'))
 		} else if (!validateEmail(email)) {
 			dispatch({
 				type: USER_REGISTER_FAIL,
