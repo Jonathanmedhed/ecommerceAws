@@ -71,6 +71,7 @@ const Summary = ({
 				loadingPay={loadingPay}
 				isDelivery={isDelivery}
 				isAdmin={isAdmin}
+				isOwner={isOwner}
 				isPagoMovil={isPagoMovil}
 				paymentHandler={paymentHandler}
 				onChange={onChange}

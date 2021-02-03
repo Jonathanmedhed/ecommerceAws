@@ -14,6 +14,7 @@ const CashPaymentComponent = ({
 	loadingPay,
 	isDelivery,
 	isAdmin,
+	isOwner,
 	isPagoMovil,
 	paymentHandler,
 	onChange,
