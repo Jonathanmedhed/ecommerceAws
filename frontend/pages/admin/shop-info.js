@@ -413,13 +413,15 @@ const ShopInfoScreen = () => {
 		<>
 			<div className="form-group">
 				<label>Días para retirar producto</label>
-				<p className="warning-msg">Se recomienda sumar +2 días si su tienda no abre los fines de semana</p>
+				<p className="warning-msg mb-qter">
+					Se recomienda sumar +2 días si su tienda no abre los fines de semana
+				</p>
 				<input type="number" name="waitTime" value={waitTime} min={0} onChange={(e) => onChange(e)}></input>
 			</div>
 
 			<div className="form-group">
 				<label>Días para preparar producto</label>
-				<p className="warning-msg">Dias necesarios para preparar el producto para su retiro/envío</p>
+				<p className="warning-msg mb-qter">Dias necesarios para preparar el producto para su retiro/envío</p>
 				<input
 					type="number"
 					name="waitTimeDelivery"
