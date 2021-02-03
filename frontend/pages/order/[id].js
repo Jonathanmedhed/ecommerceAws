@@ -128,7 +128,7 @@ const OrderScreen = ({ query }) => {
 			window.scrollTo(0, 0)
 		}
 		if (order) {
-			if (order.user && userInfo && userInfo._id === order.user._id) {
+			if (order.user && userInfo && userInfo._id === order.user) {
 				setIsOwner(true)
 			} else {
 				setIsOwner(false)
