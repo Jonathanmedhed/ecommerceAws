@@ -45,7 +45,9 @@ const getMoneyInfo = (order, toAdmin) => {
 		? ''
 		: order.paymentMethod === 'Efectivo'
 		? '\nRecuerde tener el dinero en las denominaciones indicadas para cancelar su pedido\n'
-		: 'Verificaremos la referencia en las próximas horas y le enviaremos un correo con la confirmación'
+		: !order.isApproved
+		? 'Verificaremos la referencia en las próximas horas y le enviaremos un correo con la confirmación'
+		: ''
 }
 
 const getShippingInfo = (order) => {
