@@ -230,13 +230,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
 	try {
-		if (!validateEmail(user.email)) {
-			dispatch({
-				type: USER_UPDATE_PROFILE_FAIL,
-				payload: 'Correo Invalido',
-			})
-			dispatch(setAlert('Correo Invalido', 'error'))
-		} else if (!user.email) {
+		if (!user.email) {
 			dispatch({
 				type: USER_UPDATE_PROFILE_FAIL,
 				payload: 'Correo Requerido',

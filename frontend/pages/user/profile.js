@@ -83,6 +83,7 @@ const ProfileScreen = () => {
 				></input>
 			</div>
 
+			{/**
 			<div className="form-group">
 				<label>Correo Electrónico</label>
 				<input
@@ -93,6 +94,7 @@ const ProfileScreen = () => {
 					onChange={(e) => onChange(e)}
 				></input>
 			</div>
+			 */}
 
 			<div className="form-group">
 				<label>Contraseña</label>
