@@ -127,127 +127,144 @@ export const updateShop = (shop) => async (dispatch, getState) => {
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Telefonos / Email: Formato de telefono local invalido',
 			})
-			dispatch(setAlert('Telefonos / Email: Formato de telefono local invalido', 'error'))
+			dispatch(setAlert({ title: 'Telefonos / Email:', text: 'Formato de telefono local invalido' }, 'error'))
 		} else if (!shop.address) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Dirección y Localización: Direccion Requerida',
 			})
-			dispatch(setAlert('Dirección y Localización: Direccion Requerida', 'error'))
+			dispatch(setAlert({ title: 'Dirección y Localización:', text: 'Direccion Requerida' }, 'error'))
 		} else if (!shop.city) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Dirección y Localización: Ciudad Requerida',
 			})
-			dispatch(setAlert('Dirección y Localización: Ciudad Requerida', 'error'))
+			dispatch(setAlert({ title: 'Dirección y Localización:', text: 'Ciudad Requerida' }, 'error'))
 		} else if (!shop.postalCode) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Dirección y Localización: Codigo Postal Requerido',
 			})
-			dispatch(setAlert('Dirección y Localización: Codigo Postal Requerido', 'error'))
+			dispatch(setAlert({ title: 'Dirección y Localización:', text: 'Codigo Postal Requerido' }, 'error'))
 		} else if (!shop.country) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Dirección y Localización: País Requerido',
 			})
-			dispatch(setAlert('Dirección y Localización: País Requerido', 'error'))
+			dispatch(setAlert({ title: 'Dirección y Localización:', text: 'País Requerido' }, 'error'))
 		} else if (!shop.email) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Telefonos / Email: Email Requerido',
 			})
-			dispatch(setAlert('Telefonos / Email: Email Requerido', 'error'))
+			dispatch(setAlert({ title: 'Telefonos / Email:', text: 'Email Requerido' }, 'error'))
 		} else if (!shop.title) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pagina Principal: Titulo Requerido',
 			})
-			dispatch(setAlert('Pagina Principal: Titulo Requerido', 'error'))
+			dispatch(setAlert({ title: 'Pagina Principal:', text: 'Titulo Requerido' }, 'error'))
 		} else if (!shop.message) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pagina Principal: Mensaje Requerido',
 			})
-			dispatch(setAlert('Pagina Principal: Mensaje Requerido', 'error'))
+			dispatch(setAlert({ title: 'Pagina Principal:', text: 'Mensaje Requerido' }, 'error'))
 		} else if (!shop.dollarValue || shop.dollarValue === '0') {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Valor del dolar requerido',
 			})
-			dispatch(setAlert('Valor del dolar requerido', 'error'))
+			dispatch(setAlert({ title: 'Dolar x Bolivar:', text: 'Valor del dolar requerido' }, 'error'))
 		} else if (!shop.mobileBank) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pago Movil: Banco Requerido',
 			})
-			dispatch(setAlert('Pago Movil: Banco Requerido', 'error'))
+			dispatch(setAlert({ title: 'Pago Movil:', text: 'Banco Requerido' }, 'error'))
 		} else if (!shop.mobilePhone) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pago Movil: Telefono Requerido',
 			})
-			dispatch(setAlert('Pago Movil: Telefono Requerido', 'error'))
+			dispatch(setAlert({ title: 'Pago Movil:', text: 'Telefono Requerido' }, 'error'))
 		} else if (shop.mobilePhone && !validatePhone(shop.mobilePhone)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pago Movil: Formato de telefono movil invalido',
 			})
-			dispatch(setAlert('Pago Movil: Formato de telefono movil invalido', 'error'))
+			dispatch(setAlert({ title: 'Pago Movil:', text: 'Formato de telefono movil invalido' }, 'error'))
 		} else if (!shop.mobileID) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pago Movil: Cedula Requerida',
 			})
-			dispatch(setAlert('Pago Movil: Cedula Requerida', 'error'))
+			dispatch(setAlert({ title: 'Pago Movil:', text: 'Cedula Requerida' }, 'error'))
 		} else if (!shop.waitTime || shop.waitTime === '0') {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Tiempo de Espera: Tiempo de espera requerido',
 			})
-			dispatch(setAlert('Tiempo de Espera: Tiempo de espera requerido', 'error'))
+			dispatch(setAlert({ title: 'Tiempo de Espera:', text: 'Tiempo de espera requerido' }, 'error'))
 		} else if (!shop.name) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Nombre y Logo: Tienda debe tener nombre',
 			})
-			dispatch(setAlert('Nombre y Logo: Tienda debe tener nombre', 'error'))
+			dispatch(setAlert({ title: 'Nombre y Logo:', text: 'Tienda debe tener nombre' }, 'error'))
 		} else if (shop.mobile && !validateMobile(shop.mobile)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Telefonos / Email: Formato invalido de movil +58 412 5555555',
 			})
-			dispatch(setAlert('Telefonos / Email: Formato invalido de movil +58 412 5555555', 'error'))
+			dispatch(
+				setAlert({ title: 'Telefonos / Email:', text: 'Formato invalido de movil +58 412 5555555' }, 'error')
+			)
 		} else if (shop.email && !validateEmail(shop.email)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Telefonos / Email: Correo invalido',
 			})
-			dispatch(setAlert('Telefonos / Email: Correo invalido', 'error'))
+			dispatch(setAlert({ title: 'Telefonos / Email:', text: 'Correo invalido' }, 'error'))
 		} else if (shop.facebook && !validateFacebook(shop.facebook)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Redes Sociales: Link de facebook invalido (https://www.facebook.com/...)',
 			})
-			dispatch(setAlert('Redes Sociales: Link de facebook invalido (https://www.facebook.com/...)', 'error'))
+			dispatch(
+				setAlert(
+					{ title: 'Redes Sociales:', text: 'Link de facebook invalido (https://www.facebook.com/...)' },
+					'error'
+				)
+			)
 		} else if (shop.instagram && !validateInstagram(shop.instagram)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Redes Sociales: Link de instagram invalido (https://www.instagram.com/...)',
 			})
-			dispatch(setAlert('Link de instagram invalido (https://www.instagram.com/...)', 'error'))
+			dispatch(
+				setAlert(
+					{ title: 'Redes Sociales:', text: 'Link de instagram invalido (https://www.instagram.com/...)' },
+					'error'
+				)
+			)
 		} else if (shop.twitter && !validateTwitter(shop.twitter)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Redes Sociales: Link de twitter invalido (https://www.twitter.com/...)',
 			})
-			dispatch(setAlert('Link de twitter invalido (https://www.twitter.com/...)', 'error'))
+			dispatch(
+				setAlert(
+					{ title: 'Redes Sociales:', text: 'Link de twitter invalido (https://www.twitter.com/...)' },
+					'error'
+				)
+			)
 		} else if (shop.mobileID && !validateID(shop.mobileID)) {
 			dispatch({
 				type: SHOP_UPDATE_FAIL,
 				payload: 'Pago Movil Datos: Cedula Invalida (V-18... o E-18...))',
 			})
-			dispatch(setAlert('Pago Movil Datos: Cedula Invalida (V-18... o E-18...))', 'error'))
+			dispatch(setAlert({ title: 'Pago Movil Datos:', text: 'Cedula Invalida (V-18... o E-18...)' }, 'error'))
 		} else {
 			dispatch({
 				type: SHOP_UPDATE_REQUEST,
