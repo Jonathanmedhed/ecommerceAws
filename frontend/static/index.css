@@ -2936,6 +2936,13 @@ Images
   font-weight: bold;
 }
 
+/************************************************************************************************************
+ Alignment 
+ ************************************************************************************************************/
+.center-align {
+  align-items: center;
+}
+
 /** Main Config */
 * {
   box-sizing: border-box;
@@ -6204,6 +6211,17 @@ Input group w/buttons Input group w/buttons Input group w/buttons
   font-weight: bold;
   color: #256584;
 }
+.login .content .message-vert {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.login .content .message-vert a {
+  font-weight: bold;
+  color: #256584;
+}
 
 /*****************************************************************************************************
 * Map
@@ -6358,6 +6376,17 @@ Input group w/buttons Input group w/buttons Input group w/buttons
     min-width: 12rem;
     max-width: 22rem;
   }
+}
+
+.dialog-success {
+  padding: 1rem;
+  margin: 0.5rem 1rem 0 1rem;
+  max-width: 20rem;
+  border: solid 2px #0e4263;
+  border-radius: 0.5rem;
+  color: #0e4263;
+  text-align: center;
+  font-weight: bold;
 }
 
 /*****************************************************************************************************

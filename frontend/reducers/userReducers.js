@@ -30,6 +30,10 @@ import {
 	USER_UPDATE_FAIL_RESET,
 	USER_REGISTER_FAIL_RESET,
 	USER_UPDATE_PROFILE_FAIL_RESET,
+	SEND_RECOVER_FAIL,
+	SEND_RECOVER_REQUEST,
+	SEND_RECOVER_SUCCESS,
+	SEND_RECOVER_RESET,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -141,6 +145,21 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
 			return {
 				user: {},
 			}
+		default:
+			return state
+	}
+}
+
+export const sendRecoverReducer = (state = {}, action) => {
+	switch (action.type) {
+		case SEND_RECOVER_REQUEST:
+			return { loading: true }
+		case SEND_RECOVER_SUCCESS:
+			return { loading: false, success: true }
+		case SEND_RECOVER_FAIL:
+			return { loading: false, error: action.payload }
+		case SEND_RECOVER_RESET:
+			return {}
 		default:
 			return state
 	}

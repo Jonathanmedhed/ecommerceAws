@@ -210,3 +210,42 @@ export const generateEmail = (order, shop, reason, toAdmin) => {
 		console.log(error)
 	}
 }
+
+export const generateEmailPassword = (shop, user) => {
+	try {
+		let text =
+			'Usuario ' +
+			user.name +
+			'\n' +
+			'\n' +
+			`Siga el siguiente enlace para cambiar su contraseña: \n` +
+			'\n' +
+			`${DOMAIN}/auth/reset/${user.resetPasswordLink}` +
+			`\n\nEste es un correo automatizado. \nContáctenos en nuestro correo ${shop.email} si tiene alguna duda \nGracias por su compra \n\n` +
+			shop.name +
+			'\n' +
+			shop.email +
+			'\n' +
+			shop.phone +
+			''
+
+		let html = `
+		<div style="border: solid 2px #0e4263; border-radius: 0.2rem;">
+		${emailHeader(shop)}
+		<div style='padding: 0 1rem 1rem 1rem;'>
+		<h3 style="font-weight: 100;">${`Usuario ` + `<strong>${user.name}</strong>`} </h3>
+		<p>Siga el siguiente enlace para cambiar su contrasena:</p>
+		<p>${DOMAIN}/auth/reset/${user.resetPasswordLink}</p>
+		<p>Este es un correo automatizado.</p>
+		<p>Contáctenos en nuestro correo ${shop.email} si tiene alguna duda</p>
+		<p><strong>${shop.name}</strong></p>
+		<p>${shop.email}</p>
+		<p>${shop.phone}</p>
+		</div>
+		</div>
+	`
+		return { emailText: text, emailHtml: html }
+	} catch (error) {
+		console.log(error)
+	}
+}

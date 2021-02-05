@@ -12,7 +12,7 @@ const Alert = () => {
 				alerts &&
 				alerts.length > 0 &&
 				alerts.map((alert) => (
-					<div className="message-absolute">
+					<div key={alert.msg} className="message-absolute">
 						<Message
 							severity={alert.alertType}
 							text={

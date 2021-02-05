@@ -82,6 +82,12 @@ const LoginScreen = ({ query }) => {
 		</div>
 	)
 
+	const forgotPassword = () => (
+		<div className="message-vert">
+			<span>Has olvidado tu contraseña?</span> <Link href={'auth/forgot'}>Recuperar</Link>
+		</div>
+	)
+
 	const htmlHeader = () => <HtmlHeader title={`${APP_NAME} | Iniciar Sesión`} />
 
 	return (
@@ -105,6 +111,7 @@ const LoginScreen = ({ query }) => {
 							<>
 								{loginForm()}
 								{notUserMessage()}
+								{forgotPassword()}
 							</>
 						)}
 					</div>

@@ -25,6 +25,9 @@ import {
 	USER_UPDATE_FAIL,
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_REQUEST,
+	SEND_RECOVER_REQUEST,
+	SEND_RECOVER_FAIL,
+	SEND_RECOVER_SUCCESS,
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET, ORDER_LIST_RESET, ORDER_VIEWED_SUCCESS } from '../constants/orderConstants'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
@@ -33,6 +36,8 @@ import { API } from '../config'
 import { validateEmail } from '../utilities/utilities'
 import { configJsonOnly, configAuthOnly, configJsonAndAuth, processError } from '../utilities/errorHandler'
 import { removeAlert, setAlert } from './alertActions'
+import { generateEmailPassword } from '../utilities/emailGeneration'
+import { sendEmail } from './shopActions'
 
 export const login = (email, password) => async (dispatch) => {
 	try {
@@ -366,6 +371,60 @@ export const updateUser = (user) => async (dispatch, getState) => {
 			dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
 
 			dispatch(removeAlert())
+		}
+	} catch (error) {
+		processError(error, USER_UPDATE_FAIL, dispatch)
+	}
+}
+
+export const forgotPassword = (email) => async (dispatch, getState) => {
+	try {
+		if (!email) {
+			dispatch({
+				type: SEND_RECOVER_FAIL,
+				payload: 'Email requerido',
+			})
+			dispatch(setAlert('Email requerido', 'error'))
+		} else if (!validateEmail(email)) {
+			dispatch({
+				type: SEND_RECOVER_FAIL,
+				payload: 'Email requerido',
+			})
+			dispatch(setAlert('Email invalido', 'error'))
+		} else {
+			dispatch({
+				type: SEND_RECOVER_REQUEST,
+			})
+			const {
+				shopDetails: { shop },
+			} = getState()
+
+			const config = configJsonOnly()
+
+			const { data, status } = await axios.put(`${API}/users/forgot-password`, { email }, config)
+
+			const { emailText, emailHtml } = generateEmailPassword(shop, data)
+
+			if (status === 200) {
+				await dispatch(sendEmail(data.email, `Reseteo de contraseña`, emailText, emailHtml))
+
+				dispatch({ type: SEND_RECOVER_SUCCESS })
+				dispatch(setAlert('Correo enviado', 'success'))
+			}
+		}
+	} catch (error) {
+		processError(error, SEND_RECOVER_FAIL, dispatch)
+	}
+}
+
+export const resetPassword = async (resetInfo) => {
+	try {
+		const config = configJsonOnly()
+
+		const { status } = await axios.put(`${API}/reset-password`, resetInfo, config)
+
+		if (status === 200) {
+			dispatch(setAlert('Ya puede iniciar sesión con su nueva contraseña', 'success'))
 		}
 	} catch (error) {
 		processError(error, USER_UPDATE_FAIL, dispatch)

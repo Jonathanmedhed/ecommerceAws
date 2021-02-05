@@ -9,9 +9,13 @@ const {
 	deleteUser,
 	getUserById,
 	updateUser,
+	forgotPassword,
+	resetPassword,
 } = require('../controllers/userController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
+router.put('/forgot-password', forgotPassword)
+router.put('/reset-password', resetPassword)
 router.route('/').post(registerUser).get(protect, admin, getUsers)
 router.post('/login', authUser)
 router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile)

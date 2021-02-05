@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const generateToken = require('../utils/generateToken')
+const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
 // @desc    Auth user & get token
@@ -168,5 +169,49 @@ exports.updateUser = asyncHandler(async (req, res) => {
 	} else {
 		res.status(404)
 		throw new Error('Usuario no encontrado')
+	}
+})
+
+exports.forgotPassword = asyncHandler(async (req, res) => {
+	const { email } = req.body
+
+	const user = await User.findOne({ email })
+
+	if (!user) {
+		res.status(404)
+		throw new Error('Usuario con correo indicado no encontrado')
+	}
+
+	const token = jwt.sign({ _id: user._id }, process.env.JWT_RESET_PASSWORD, { expiresIn: '10m' })
+
+	user.resetPasswordLink = token
+
+	await user.save()
+
+	res.json(user)
+})
+
+exports.resetPassword = asyncHandler((req, res) => {
+	const { resetPasswordLink, newPassword } = req.body
+
+	if (resetPasswordLink) {
+		jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, async function (err, decoded) {
+			if (err) {
+				res.status(401)
+				throw new Error('Enlace ha vencido, Intente luego')
+			}
+			const user = await User.findOne({ resetPasswordLink })
+
+			if (!user) {
+				res.status(401)
+				throw new Error('Algo ha fallado, intente luego.')
+			}
+
+			user.password = newPassword
+			user.resetPasswordLink = ''
+
+			await user.save()
+			res.json(user)
+		})
 	}
 })

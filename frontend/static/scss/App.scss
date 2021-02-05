@@ -3459,6 +3459,17 @@ Input group w/buttons Input group w/buttons Input group w/buttons
         color: $light-color;
       }
     }
+    .message-vert {
+      display: flex;
+      flex-direction: column;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      text-align: center;
+      a {
+        font-weight: bold;
+        color: $light-color;
+      }
+    }
   }
 }
 
@@ -3611,6 +3622,17 @@ Input group w/buttons Input group w/buttons Input group w/buttons
     min-width: 12rem;
     max-width: 22rem;
   }
+}
+
+.dialog-success {
+  padding: 1rem;
+  margin: 0.5rem 1rem 0 1rem;
+  max-width: 20rem;
+  border: solid 2px $primary-color;
+  border-radius: 0.5rem;
+  color: $primary-color;
+  text-align: center;
+  font-weight: bold;
 }
 
 /*****************************************************************************************************
