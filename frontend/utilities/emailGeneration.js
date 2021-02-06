@@ -234,8 +234,50 @@ export const generateEmailPassword = (shop, user) => {
 		${emailHeader(shop)}
 		<div style='padding: 0 1rem 1rem 1rem;'>
 		<h3 style="font-weight: 100;">${`Usuario ` + `<strong>${user.name}</strong>`} </h3>
-		<p>Siga el siguiente enlace para cambiar su contrasena:</p>
+		<p>Ingrese <a href='${DOMAIN}/auth/reset/${user.resetPasswordLink}'>aquí</a> para cambiar su contraseña</p>
+		<p>O copie y pegue elsiguiente enlace en su navegador:</p>
 		<p>${DOMAIN}/auth/reset/${user.resetPasswordLink}</p>
+		<p>Este es un correo automatizado.</p>
+		<p>Contáctenos en nuestro correo ${shop.email} si tiene alguna duda</p>
+		<p><strong>${shop.name}</strong></p>
+		<p>${shop.email}</p>
+		<p>${shop.phone}</p>
+		</div>
+		</div>
+	`
+		return { emailText: text, emailHtml: html }
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+export const generateEmailResetSuccess = (shop, user) => {
+	try {
+		let text =
+			'Usuario ' +
+			user.name +
+			'\n' +
+			'\n' +
+			`Le informamos que su contraseña ha sido actualizada \n` +
+			'\n' +
+			'\n' +
+			`En caso que usted no haya realizado el cambio, no dude en comunicarse con nosotros \n` +
+			'\n' +
+			`\n\nEste es un correo automatizado. \nContáctenos en nuestro correo ${shop.email} si tiene alguna duda \nGracias por su compra \n\n` +
+			shop.name +
+			'\n' +
+			shop.email +
+			'\n' +
+			shop.phone +
+			''
+
+		let html = `
+		<div style="border: solid 2px #0e4263; border-radius: 0.2rem;">
+		${emailHeader(shop)}
+		<div style='padding: 0 1rem 1rem 1rem;'>
+		<h3 style="font-weight: 100;">${`Usuario ` + `<strong>${user.name}</strong>`} </h3>
+		<p>Le informamos que su contraseña ha sido actualizada</p>
+		<p>En caso que usted no haya realizado el cambio, no dude en comunicarse con nosotros</p>
 		<p>Este es un correo automatizado.</p>
 		<p>Contáctenos en nuestro correo ${shop.email} si tiene alguna duda</p>
 		<p><strong>${shop.name}</strong></p>

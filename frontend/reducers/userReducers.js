@@ -34,6 +34,10 @@ import {
 	SEND_RECOVER_REQUEST,
 	SEND_RECOVER_SUCCESS,
 	SEND_RECOVER_RESET,
+	RESET_PASSWORD_REQUEST,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_FAIL,
+	RESET_PASSWORD_RESET,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -159,6 +163,21 @@ export const sendRecoverReducer = (state = {}, action) => {
 		case SEND_RECOVER_FAIL:
 			return { loading: false, error: action.payload }
 		case SEND_RECOVER_RESET:
+			return {}
+		default:
+			return state
+	}
+}
+
+export const resetPasswordReducer = (state = {}, action) => {
+	switch (action.type) {
+		case RESET_PASSWORD_REQUEST:
+			return { loading: true }
+		case RESET_PASSWORD_SUCCESS:
+			return { loading: false, success: true }
+		case RESET_PASSWORD_FAIL:
+			return { loading: false, error: action.payload }
+		case RESET_PASSWORD_RESET:
 			return {}
 		default:
 			return state

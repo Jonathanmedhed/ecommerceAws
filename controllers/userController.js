@@ -191,27 +191,32 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
 	res.json(user)
 })
 
-exports.resetPassword = asyncHandler((req, res) => {
-	const { resetPasswordLink, newPassword } = req.body
+exports.resetPassword = asyncHandler(async (req, res) => {
+	const { resetPasswordLink, password } = req.body
 
 	if (resetPasswordLink) {
+		let isStillValid = true
+
+		const user = await User.findOne({ resetPasswordLink })
+
 		jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, async function (err, decoded) {
 			if (err) {
-				res.status(401)
-				throw new Error('Enlace ha vencido, Intente luego')
+				isStillValid = false
 			}
-			const user = await User.findOne({ resetPasswordLink })
+		})
 
-			if (!user) {
-				res.status(401)
-				throw new Error('Algo ha fallado, intente luego.')
-			}
-
-			user.password = newPassword
+		if (!isStillValid) {
+			res.status(401)
+			throw new Error('Enlace ha vencido, Intente luego')
+		} else if (!user) {
+			res.status(401)
+			throw new Error('Algo ha fallado, intente luego.')
+		} else {
+			user.password = password
 			user.resetPasswordLink = ''
 
 			await user.save()
 			res.json(user)
-		})
+		}
 	}
 })

@@ -28,6 +28,9 @@ import {
 	SEND_RECOVER_REQUEST,
 	SEND_RECOVER_FAIL,
 	SEND_RECOVER_SUCCESS,
+	RESET_PASSWORD_FAIL,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_REQUEST,
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET, ORDER_LIST_RESET, ORDER_VIEWED_SUCCESS } from '../constants/orderConstants'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
@@ -36,7 +39,7 @@ import { API } from '../config'
 import { validateEmail } from '../utilities/utilities'
 import { configJsonOnly, configAuthOnly, configJsonAndAuth, processError } from '../utilities/errorHandler'
 import { removeAlert, setAlert } from './alertActions'
-import { generateEmailPassword } from '../utilities/emailGeneration'
+import { generateEmailPassword, generateEmailResetSuccess } from '../utilities/emailGeneration'
 import { sendEmail } from './shopActions'
 
 export const login = (email, password) => async (dispatch) => {
@@ -406,7 +409,7 @@ export const forgotPassword = (email) => async (dispatch, getState) => {
 			const { emailText, emailHtml } = generateEmailPassword(shop, data)
 
 			if (status === 200) {
-				await dispatch(sendEmail(data.email, `Reseteo de contraseña`, emailText, emailHtml))
+				await dispatch(sendEmail(data.email, `${shop.name}: Reseteo de contraseña`, emailText, emailHtml))
 
 				dispatch({ type: SEND_RECOVER_SUCCESS })
 				dispatch(setAlert('Correo enviado', 'success'))
@@ -417,16 +420,43 @@ export const forgotPassword = (email) => async (dispatch, getState) => {
 	}
 }
 
-export const resetPassword = async (resetInfo) => {
+export const resetPassword = (resetInfo) => async (dispatch, getState) => {
 	try {
-		const config = configJsonOnly()
+		if (!resetInfo.password || !resetInfo.confirmPassword) {
+			dispatch({
+				type: RESET_PASSWORD_FAIL,
+				payload: 'Contraseña Requerida',
+			})
+			dispatch(setAlert('Contraseña Requerida', 'error'))
+		} else if (resetInfo.password !== resetInfo.confirmPassword) {
+			dispatch({
+				type: RESET_PASSWORD_FAIL,
+				payload: 'Contraseñas no son iguales',
+			})
+			dispatch(setAlert('Contraseñas no son iguales', 'error'))
+		} else {
+			dispatch({
+				type: RESET_PASSWORD_REQUEST,
+			})
 
-		const { status } = await axios.put(`${API}/reset-password`, resetInfo, config)
+			const {
+				shopDetails: { shop },
+			} = getState()
 
-		if (status === 200) {
-			dispatch(setAlert('Ya puede iniciar sesión con su nueva contraseña', 'success'))
+			const config = configJsonOnly()
+
+			const { data, status } = await axios.put(`${API}/users/reset-password`, resetInfo, config)
+
+			const { emailText, emailHtml } = generateEmailResetSuccess(shop, data)
+
+			if (status === 200) {
+				await dispatch(sendEmail(data.email, `${shop.name}: Contraseña actualizada`, emailText, emailHtml))
+
+				dispatch({ type: RESET_PASSWORD_SUCCESS })
+				dispatch(setAlert('Correo enviado', 'success'))
+			}
 		}
 	} catch (error) {
-		processError(error, USER_UPDATE_FAIL, dispatch)
+		processError(error, RESET_PASSWORD_FAIL, dispatch)
 	}
 }
