@@ -11,4 +11,6 @@ export const API = publicRuntimeConfig.PRODUCTION
 	? publicRuntimeConfig.API_PRODUCTION
 	: publicRuntimeConfig.API_DEVELOPMENT
 
+export const PRODUCTION = publicRuntimeConfig.PRODUCTION
 export const GOOGLE_CLIENT_ID = publicRuntimeConfig.GOOGLE_CLIENT_ID
+export const GOOGLE_CLIENT_ID_LOCAL = publicRuntimeConfig.GOOGLE_CLIENT_ID_LOCAL

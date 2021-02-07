@@ -11,6 +11,7 @@ import { shopDetails as getShopDetails } from '../actions/shopActions'
 // constants
 import { PRE_REGISTER_RESET } from '../constants/userConstants'
 import { APP_NAME } from '../config'
+import LoginGoogle from '../components/auth/LoginGoogle'
 
 const RegisterScreen = ({ query }) => {
 	const router = useRouter()
@@ -114,6 +115,8 @@ const RegisterScreen = ({ query }) => {
 			<button type="submit" className="btn btn-primary mt-1">
 				Registrar
 			</button>
+
+			<LoginGoogle />
 		</form>
 	)
 

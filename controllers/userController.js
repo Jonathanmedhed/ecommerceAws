@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const generateToken = require('../utils/generateToken')
 const jwt = require('jsonwebtoken')
+const { OAuth2Client } = require('google-auth-library')
 const User = require('../models/userModel')
 
 // @desc    Auth user & get token
@@ -287,3 +288,55 @@ exports.preSignup = asyncHandler(async (req, res) => {
 		res.json(token)
 	}
 })
+
+const GOOGLE_ID =
+	process.env.NODE_ENV === 'development' ? process.env.GOOGLE_CLIENT_ID_LOCAL : process.env.GOOGLE_CLIENT_ID
+
+const client = new OAuth2Client(GOOGLE_ID)
+exports.googleLogin = (req, res) => {
+	const idToken = req.body.tokenId
+	client.verifyIdToken({ idToken, audience: GOOGLE_ID }).then((response) => {
+		// console.log(response)
+		const { email_verified, name, email, jti } = response.payload
+		if (email_verified) {
+			User.findOne({ email }).exec((err, user) => {
+				if (user) {
+					const token = generateToken(user._id)
+					res.cookie('token', token, { expiresIn: '1d' })
+					const { _id, email, name, isAdmin } = user
+					return res.json({
+						_id,
+						name,
+						email,
+						isAdmin,
+						token: token,
+					})
+				} else {
+					let password = jti
+					user = new User({ name, email, password, isAdmin: false })
+					user.save((err, data) => {
+						if (err) {
+							return res.status(400).json({
+								error: err,
+							})
+						}
+						const token = generateToken(user._id)
+						res.cookie('token', token, { expiresIn: '1d' })
+						const { _id, email, name, isAdmin } = data
+						return res.json({
+							_id,
+							name,
+							email,
+							isAdmin,
+							token: token,
+						})
+					})
+				}
+			})
+		} else {
+			return res.status(400).json({
+				error: 'Google login failed. Try again.',
+			})
+		}
+	})
+}

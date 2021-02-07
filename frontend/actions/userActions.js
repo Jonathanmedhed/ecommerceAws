@@ -502,11 +502,16 @@ export const loginWithGoogle = (user) => async (dispatch, getState) => {
 
 		const config = configJsonOnly()
 
-		const { data } = await axios.post(`${API}/google-login`, user, config)
+		const { data } = await axios.post(`${API}/users/google-login`, user, config)
 
 		dispatch({
 			type: USER_LOGIN_SUCCESS,
 			payload: data,
+		})
+
+		// update order list
+		dispatch({
+			type: ORDER_VIEWED_SUCCESS,
 		})
 
 		localStorage.setItem('userInfo', JSON.stringify(data))
