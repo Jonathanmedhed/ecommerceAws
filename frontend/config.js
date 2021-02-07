@@ -8,5 +8,7 @@ export const DOMAIN = publicRuntimeConfig.PRODUCTION
 	: publicRuntimeConfig.DOMAIN_DEVELOPMENT
 
 export const API = publicRuntimeConfig.PRODUCTION
-? publicRuntimeConfig.API_PRODUCTION
-: publicRuntimeConfig.API_DEVELOPMENT
+	? publicRuntimeConfig.API_PRODUCTION
+	: publicRuntimeConfig.API_DEVELOPMENT
+
+export const GOOGLE_CLIENT_ID = publicRuntimeConfig.GOOGLE_CLIENT_ID

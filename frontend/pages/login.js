@@ -11,6 +11,7 @@ import { shopDetails as getShopDetails } from '../actions/shopActions'
 // constants
 import { USER_LOGIN_RESET } from '../constants/userConstants'
 import { APP_NAME } from '../config'
+import LoginGoogle from '../components/auth/LoginGoogle'
 
 const LoginScreen = ({ query }) => {
 	const router = useRouter()
@@ -73,6 +74,8 @@ const LoginScreen = ({ query }) => {
 			<button type="submit" className="btn btn-primary mt-half">
 				Ingresar
 			</button>
+
+			<LoginGoogle />
 		</form>
 	)
 

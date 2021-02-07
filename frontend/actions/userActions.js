@@ -493,3 +493,25 @@ export const preRegister = (name, email, password, confirmPassword) => async (di
 		processError(error, PRE_REGISTER_FAIL, dispatch)
 	}
 }
+
+export const loginWithGoogle = (user) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: USER_LOGIN_REQUEST,
+		})
+
+		const config = configJsonOnly()
+
+		const { data } = await axios.post(`${API}/google-login`, user, config)
+
+		dispatch({
+			type: USER_LOGIN_SUCCESS,
+			payload: data,
+		})
+
+		localStorage.setItem('userInfo', JSON.stringify(data))
+		dispatch(removeAlert())
+	} catch (error) {
+		processError(error, USER_LOGIN_FAIL, dispatch)
+	}
+}
