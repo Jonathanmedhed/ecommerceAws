@@ -9,8 +9,9 @@ const LoginGoogle = () => {
 	const responseGoogle = (response) => {
 		const tokenId = response.tokenId
 		const user = { tokenId }
-
-		dispatch(loginWithGoogle(user))
+		if(tokenId){
+			dispatch(loginWithGoogle(user))
+		}
 	}
 
 	return (
