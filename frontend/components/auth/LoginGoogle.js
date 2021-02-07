@@ -7,7 +7,6 @@ const LoginGoogle = () => {
 	const dispatch = useDispatch()
 
 	const responseGoogle = (response) => {
-		// console.log(response);
 		const tokenId = response.tokenId
 		const user = { tokenId }
 
@@ -16,6 +15,11 @@ const LoginGoogle = () => {
 
 	return (
 		<div className="mt-half">
+			<div>{PRODUCTION ? 'production' : 'development'}</div>
+			<div>{GOOGLE_CLIENT_ID}</div>
+			<div>{GOOGLE_CLIENT_ID_LOCAL}</div>
+			{/**
+			 * 
 			<GoogleLogin
 				clientId={`${PRODUCTION ? GOOGLE_CLIENT_ID : GOOGLE_CLIENT_ID_LOCAL}`}
 				buttonText="Ingresa con Google"
@@ -23,6 +27,7 @@ const LoginGoogle = () => {
 				onFailure={responseGoogle}
 				theme="dark"
 			/>
+			 */}
 		</div>
 	)
 }
