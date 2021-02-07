@@ -15,23 +15,13 @@ const LoginGoogle = () => {
 
 	return (
 		<div className="mt-half">
-			{PRODUCTION ? (
-				<GoogleLogin
-					clientId={`${GOOGLE_CLIENT_ID}`}
-					buttonText="Ingresa con Google"
-					onSuccess={responseGoogle}
-					onFailure={responseGoogle}
-					theme="dark"
-				/>
-			) : (
-				<GoogleLogin
-					clientId={`${GOOGLE_CLIENT_ID_LOCAL}`}
-					buttonText="Ingresa con Google"
-					onSuccess={responseGoogle}
-					onFailure={responseGoogle}
-					theme="dark"
-				/>
-			)}
+			<GoogleLogin
+				clientId={`${GOOGLE_CLIENT_ID}`}
+				buttonText="Ingresa con Google"
+				onSuccess={responseGoogle}
+				onFailure={responseGoogle}
+				theme="dark"
+			/>
 		</div>
 	)
 }
