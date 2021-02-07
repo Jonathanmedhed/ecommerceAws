@@ -3,14 +3,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 // components
-import Message from '../components/alerts/Message'
 import Loader from '../components/loader/Loader'
 import HtmlHeader from '../components/html-header/HtmlHeader'
 // actions
-import { register } from '../actions/userActions'
+import { preRegister as preRegisterAction } from '../actions/userActions'
 import { shopDetails as getShopDetails } from '../actions/shopActions'
 // constants
-import { USER_REGISTER_RESET } from '../constants/userConstants'
+import { PRE_REGISTER_RESET } from '../constants/userConstants'
 import { APP_NAME } from '../config'
 
 const RegisterScreen = ({ query }) => {
@@ -21,11 +20,16 @@ const RegisterScreen = ({ query }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [confirmPassword, setConfirmPassword] = useState('')
+	const [showForm, setShowForm] = useState(true)
+	const [message, setMessage] = useState('')
 
 	const dispatch = useDispatch()
 
-	const userRegister = useSelector((state) => state.userRegister)
-	const { loading, error, userInfo } = userRegister
+	const userLogin = useSelector((state) => state.userLogin)
+	const { userInfo } = userLogin
+
+	const preRegister = useSelector((state) => state.preRegister)
+	const { loading, success } = preRegister
 
 	const shopDetails = useSelector((state) => state.shopDetails)
 	const { shop, loading: loadingShop } = shopDetails
@@ -39,20 +43,25 @@ const RegisterScreen = ({ query }) => {
 		if (!shop) {
 			dispatch(getShopDetails())
 		}
-	}, [router, userInfo, redirect, shop])
+		if (success) {
+			setMessage('Correo de confirmación enviado, revisa tu buzón y activa tu cuenta.')
+			setShowForm(false)
+			dispatch({ type: PRE_REGISTER_RESET })
+		}
+	}, [router, userInfo, redirect, shop, success])
 
 	const submitHandler = (e) => {
 		e.preventDefault()
-		dispatch(register(name, email, password, confirmPassword))
+		dispatch(preRegisterAction(name, email, password, confirmPassword))
 	}
 
 	const onChangeEmail = (value) => {
-		dispatch({ type: USER_REGISTER_RESET })
+		dispatch({ type: PRE_REGISTER_RESET })
 		setEmail(value)
 	}
 
 	const onChangePasswords = (value, main) => {
-		dispatch({ type: USER_REGISTER_RESET })
+		dispatch({ type: PRE_REGISTER_RESET })
 		if (main) {
 			setPassword(value)
 		} else {
@@ -135,8 +144,14 @@ const RegisterScreen = ({ query }) => {
 							<Loader />
 						) : (
 							<>
-								{registerForm()}
-								{alreadyUserMessage()}
+								{showForm ? (
+									<>
+										{registerForm()}
+										{alreadyUserMessage()}
+									</>
+								) : (
+									<p className="dialog-success">{message}</p>
+								)}
 							</>
 						)}
 					</div>

@@ -31,6 +31,9 @@ import {
 	RESET_PASSWORD_FAIL,
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_REQUEST,
+	PRE_REGISTER_REQUEST,
+	PRE_REGISTER_FAIL,
+	PRE_REGISTER_SUCCESS,
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET, ORDER_LIST_RESET, ORDER_VIEWED_SUCCESS } from '../constants/orderConstants'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
@@ -39,7 +42,7 @@ import { API } from '../config'
 import { validateEmail } from '../utilities/utilities'
 import { configJsonOnly, configAuthOnly, configJsonAndAuth, processError } from '../utilities/errorHandler'
 import { removeAlert, setAlert } from './alertActions'
-import { generateEmailPassword, generateEmailResetSuccess } from '../utilities/emailGeneration'
+import { generateEmailPassword, generateEmailResetSuccess, generateEmailRegister } from '../utilities/emailGeneration'
 import { sendEmail } from './shopActions'
 
 export const login = (email, password) => async (dispatch) => {
@@ -107,54 +110,30 @@ export const logout = () => (dispatch) => {
 	document.location.href = '/login'
 }
 
-export const register = (name, email, password, confirmPassword) => async (dispatch) => {
+export const register = (token) => async (dispatch) => {
 	try {
-		if (!password || !confirmPassword) {
-			dispatch({
-				type: USER_REGISTER_FAIL,
-				payload: 'Contraseñas requeridas',
-			})
-			dispatch(setAlert('Contraseñas requeridas', 'error'))
-		} else if (!password) {
-			dispatch({
-				type: USER_REGISTER_FAIL,
-				payload: 'Correo Invalido',
-			})
-			dispatch(setAlert('Correo Invalido', 'error'))
-		} else if (!validateEmail(email)) {
-			dispatch({
-				type: USER_REGISTER_FAIL,
-				payload: 'Correo Invalido',
-			})
-			dispatch(setAlert('Correo Invalido', 'error'))
-		} else if (!name) {
-			dispatch({
-				type: USER_REGISTER_FAIL,
-				payload: 'Nombre Requerido',
-			})
-			dispatch(setAlert('Nombre Requerido', 'error'))
-		} else {
-			dispatch({
-				type: USER_REGISTER_REQUEST,
-			})
+		dispatch({
+			type: USER_REGISTER_REQUEST,
+		})
 
-			const config = configJsonOnly()
+		const config = configJsonOnly()
 
-			const { data } = await axios.post(`${API}/users`, { name, email, password }, config)
+		const { data } = await axios.post(`${API}/users`, { token }, config)
 
-			dispatch({
-				type: USER_REGISTER_SUCCESS,
-				payload: data,
-			})
+		dispatch({
+			type: USER_REGISTER_SUCCESS,
+			payload: data,
+		})
 
-			dispatch({
-				type: USER_LOGIN_SUCCESS,
-				payload: data,
-			})
+		dispatch({
+			type: USER_LOGIN_SUCCESS,
+			payload: data,
+		})
 
-			localStorage.setItem('userInfo', JSON.stringify(data))
-			dispatch(removeAlert())
-		}
+		dispatch(setAlert('Cuenta Activada', 'success'))
+
+		localStorage.setItem('userInfo', JSON.stringify(data))
+		dispatch(removeAlert())
 	} catch (error) {
 		processError(error, USER_REGISTER_FAIL, dispatch)
 	}
@@ -412,7 +391,6 @@ export const forgotPassword = (email) => async (dispatch, getState) => {
 				await dispatch(sendEmail(data.email, `${shop.name}: Reseteo de contraseña`, emailText, emailHtml))
 
 				dispatch({ type: SEND_RECOVER_SUCCESS })
-				dispatch(setAlert('Correo enviado', 'success'))
 			}
 		}
 	} catch (error) {
@@ -453,10 +431,65 @@ export const resetPassword = (resetInfo) => async (dispatch, getState) => {
 				await dispatch(sendEmail(data.email, `${shop.name}: Contraseña actualizada`, emailText, emailHtml))
 
 				dispatch({ type: RESET_PASSWORD_SUCCESS })
-				dispatch(setAlert('Correo enviado', 'success'))
 			}
 		}
 	} catch (error) {
 		processError(error, RESET_PASSWORD_FAIL, dispatch)
+	}
+}
+
+export const preRegister = (name, email, password, confirmPassword) => async (dispatch, getState) => {
+	try {
+		if (!password || !confirmPassword) {
+			dispatch({
+				type: PRE_REGISTER_FAIL,
+				payload: 'Contraseñas requeridas',
+			})
+			dispatch(setAlert('Contraseñas requeridas', 'error'))
+		} else if (!password) {
+			dispatch({
+				type: PRE_REGISTER_FAIL,
+				payload: 'Correo Invalido',
+			})
+			dispatch(setAlert('Correo Invalido', 'error'))
+		} else if (!validateEmail(email)) {
+			dispatch({
+				type: PRE_REGISTER_FAIL,
+				payload: 'Correo Invalido',
+			})
+			dispatch(setAlert('Correo Invalido', 'error'))
+		} else if (!name) {
+			dispatch({
+				type: PRE_REGISTER_FAIL,
+				payload: 'Nombre Requerido',
+			})
+			dispatch(setAlert('Nombre Requerido', 'error'))
+		} else {
+			dispatch({
+				type: PRE_REGISTER_REQUEST,
+			})
+
+			const {
+				shopDetails: { shop },
+			} = getState()
+
+			const config = configJsonOnly()
+
+			const { data, status } = await axios.post(`${API}/users/pre-signup`, { name, email, password }, config)
+
+			const { emailText, emailHtml } = generateEmailRegister(shop, name, data)
+
+			if (status === 200) {
+				await dispatch(sendEmail(email, `${shop.name}: Validación Registro`, emailText, emailHtml))
+
+				dispatch({
+					type: PRE_REGISTER_SUCCESS,
+				})
+
+				dispatch(removeAlert())
+			}
+		}
+	} catch (error) {
+		processError(error, PRE_REGISTER_FAIL, dispatch)
 	}
 }

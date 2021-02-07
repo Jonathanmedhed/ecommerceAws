@@ -38,6 +38,10 @@ import {
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL,
 	RESET_PASSWORD_RESET,
+	PRE_REGISTER_REQUEST,
+	PRE_REGISTER_FAIL,
+	PRE_REGISTER_SUCCESS,
+	PRE_REGISTER_RESET,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -178,6 +182,21 @@ export const resetPasswordReducer = (state = {}, action) => {
 		case RESET_PASSWORD_FAIL:
 			return { loading: false, error: action.payload }
 		case RESET_PASSWORD_RESET:
+			return {}
+		default:
+			return state
+	}
+}
+
+export const preRegisterReducer = (state = {}, action) => {
+	switch (action.type) {
+		case PRE_REGISTER_REQUEST:
+			return { loading: true }
+		case PRE_REGISTER_SUCCESS:
+			return { loading: false, success: true }
+		case PRE_REGISTER_FAIL:
+			return { loading: false, error: action.payload }
+		case PRE_REGISTER_RESET:
 			return {}
 		default:
 			return state

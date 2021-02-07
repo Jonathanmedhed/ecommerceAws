@@ -28,6 +28,7 @@ exports.authUser = asyncHandler(async (req, res) => {
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
+/**
 exports.registerUser = asyncHandler(async (req, res) => {
 	const { name, email, password, isAdmin } = req.body
 	const userExists = await User.findOne({ email })
@@ -55,6 +56,57 @@ exports.registerUser = asyncHandler(async (req, res) => {
 	} else {
 		res.status(400)
 		throw new Error('Informacion incorrecta')
+	}
+})
+ */
+exports.registerUser = asyncHandler(async (req, res) => {
+	const token = req.body.token
+	if (token) {
+		let isValid = true
+
+		jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function (err, decoded) {
+			if (err) {
+				isValid = false
+			}
+		})
+
+		if (isValid) {
+			const { name, email, password } = jwt.decode(token)
+
+			const userExists = await User.findOne({ email })
+
+			if (userExists) {
+				res.status(400)
+				throw new Error('Usuario ya existe')
+			}
+
+			const user = await User.create({
+				name,
+				email,
+				password,
+				isAdmin: false,
+			})
+
+			if (user) {
+				res.status(201).json({
+					_id: user._id,
+					name: user.name,
+					email: user.email,
+					isAdmin: user.isAdmin,
+					token: generateToken(user._id),
+				})
+			} else {
+				res.status(400)
+				throw new Error('Informacion incorrecta')
+			}
+		} else {
+			res.status(404)
+			throw new Error('Enlace ha caducado, debe registrarse de nuevo')
+		}
+	} else {
+		return res.json({
+			message: 'Something went wrong. Try again',
+		})
 	}
 })
 
@@ -207,7 +259,7 @@ exports.resetPassword = asyncHandler(async (req, res) => {
 
 		if (!isStillValid) {
 			res.status(401)
-			throw new Error('Enlace ha vencido, Intente luego')
+			throw new Error('Enlace ha vencido. Realizar proceso de nuevo.')
 		} else if (!user) {
 			res.status(401)
 			throw new Error('Algo ha fallado, intente luego.')
@@ -218,5 +270,20 @@ exports.resetPassword = asyncHandler(async (req, res) => {
 			await user.save()
 			res.json(user)
 		}
+	}
+})
+
+exports.preSignup = asyncHandler(async (req, res) => {
+	const { name, email, password } = req.body
+
+	const user = await User.findOne({ email })
+
+	if (user) {
+		res.status(400)
+		throw new Error('Email ya en uso.')
+	} else {
+		const token = jwt.sign({ name, email, password }, process.env.JWT_ACCOUNT_ACTIVATION, { expiresIn: '10m' })
+
+		res.json(token)
 	}
 })

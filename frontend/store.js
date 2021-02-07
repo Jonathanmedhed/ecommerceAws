@@ -29,6 +29,7 @@ import {
 	userUpdateReducer,
 	sendRecoverReducer,
 	resetPasswordReducer,
+	preRegisterReducer,
 } from './reducers/userReducers'
 import {
 	orderCreateReducer,
@@ -66,6 +67,7 @@ const reducer = combineReducers({
 	userUpdate: userUpdateReducer,
 	sendRecover: sendRecoverReducer,
 	resetPassword: resetPasswordReducer,
+	preRegister: preRegisterReducer,
 	orderCreate: orderCreateReducer,
 	orderDetails: orderDetailsReducer,
 	orderApprove: orderApproveReducer,
