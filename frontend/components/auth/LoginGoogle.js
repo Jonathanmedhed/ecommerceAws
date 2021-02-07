@@ -15,10 +15,7 @@ const LoginGoogle = () => {
 
 	return (
 		<div className="mt-half">
-			<div>{GOOGLE_CLIENT_ID}</div>
-			<div>{GOOGLE_CLIENT_ID_LOCAL}</div>
-			<div>{PRODUCTION ? 'production' : 'dev'}</div>
-			{/**PRODUCTION ? (
+			{PRODUCTION ? (
 				<GoogleLogin
 					clientId={`${GOOGLE_CLIENT_ID}`}
 					buttonText="Ingresa con Google"
@@ -34,7 +31,7 @@ const LoginGoogle = () => {
 					onFailure={responseGoogle}
 					theme="dark"
 				/>
-			)*/}
+			)}
 		</div>
 	)
 }

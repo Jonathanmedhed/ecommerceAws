@@ -108,15 +108,9 @@ const LoginScreen = ({ query }) => {
 					></img>
 					<div className="content">
 						<h3>Iniciar Sesión</h3>
-						{loading ? (
-							<Loader />
-						) : (
-							<>
-								{loginForm()}
-								{notUserMessage()}
-								{forgotPassword()}
-							</>
-						)}
+						{loginForm()}
+						{notUserMessage()}
+						{forgotPassword()}
 					</div>
 				</div>
 			)}
