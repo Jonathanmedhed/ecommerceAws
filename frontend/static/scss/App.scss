@@ -2415,8 +2415,9 @@ form {
       align-items: center;
       .title {
         width: 100%;
+        padding: 0 0.3rem;
         font-size: 2rem;
-        font-weight: 100;
+        font-weight: 500;
         color: $dark-color;
         text-align: center;
         background-color: $primary-color;
@@ -2893,7 +2894,7 @@ form {
       align-items: center;
       .title {
         width: 100%;
-        font-size: 2rem;
+        font-size: 1.6rem;
         color: $dark-color;
         text-align: center;
         background-color: $primary-color;
@@ -3089,8 +3090,7 @@ form {
       .title {
         width: 100%;
         padding: 0 0.3rem;
-        font-size: 1.8rem;
-        font-weight: 900;
+        font-size: 1.6rem;
         color: $dark-color;
         text-align: center;
         background-color: $primary-color;

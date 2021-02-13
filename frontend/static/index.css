@@ -5179,8 +5179,9 @@ form .uploaded-file {
 .home-section .three-products .message .title,
 .home-section .three-products-w-border .message .title {
   width: 100%;
+  padding: 0 0.3rem;
   font-size: 2rem;
-  font-weight: 100;
+  font-weight: 500;
   color: #0b212e;
   text-align: center;
   background-color: #0e4263;
@@ -5661,7 +5662,7 @@ form .uploaded-file {
   .three-products .message .title,
 .three-products-w-border .message .title {
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: #0b212e;
     text-align: center;
     background-color: #0e4263;
@@ -5863,8 +5864,7 @@ form .uploaded-file {
 .three-products-w-border .message .title {
     width: 100%;
     padding: 0 0.3rem;
-    font-size: 1.8rem;
-    font-weight: 900;
+    font-size: 1.6rem;
     color: #0b212e;
     text-align: center;
     background-color: #0e4263;
