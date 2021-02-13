@@ -116,6 +116,11 @@ const shopSchema = mongoose.Schema(
 		externalLink: {
 			type: String,
 		},
+		deliveryRules: [
+			{
+				type: String,
+			},
+		],
 	},
 	{
 		timestamps: true,
@@ -123,4 +128,3 @@ const shopSchema = mongoose.Schema(
 )
 
 module.exports = mongoose.model('Shop', shopSchema)
-

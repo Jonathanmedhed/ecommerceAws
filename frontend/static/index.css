@@ -4999,6 +4999,8 @@ form .uploaded-file {
   justify-content: center;
   background-color: #000000;
   max-height: 30rem;
+  overflow-y: hidden;
+  border-bottom: solid 0.5rem #0e4263;
 }
 .home-section .content .home-image {
   max-height: 30rem;
@@ -5048,6 +5050,7 @@ form .uploaded-file {
   justify-content: center;
   min-height: 10rem;
   background-color: white;
+  border-bottom: solid 0.5rem #0e4263;
 }
 .home-section .content-text .message {
   position: absolute;
@@ -5084,6 +5087,8 @@ form .uploaded-file {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  border-bottom: solid 0.5rem #0e4263;
+  overflow-y: hidden;
 }
 .home-section .content-separated .separated-content .home-image {
   max-height: 30rem;
@@ -5127,6 +5132,8 @@ form .uploaded-file {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  border-bottom: solid 0.5rem #0e4263;
+  overflow-y: hidden;
 }
 .home-section .content-separated-rev .separated-content .home-image {
   max-height: 30rem;
@@ -5153,22 +5160,26 @@ form .uploaded-file {
   font-weight: bold;
   hyphens: auto;
 }
-.home-section .three-products {
+.home-section .three-products,
+.home-section .three-products-w-border {
   position: relative;
+  min-height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 10rem;
+  padding-bottom: 1rem;
   background-color: white;
 }
-.home-section .three-products .message {
+.home-section .three-products .message,
+.home-section .three-products-w-border .message {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.home-section .three-products .message .title {
+.home-section .three-products .message .title,
+.home-section .three-products-w-border .message .title {
   width: 100%;
   font-size: 2rem;
   font-weight: 100;
@@ -5177,27 +5188,32 @@ form .uploaded-file {
   background-color: #0e4263;
   color: white;
 }
-.home-section .three-products .message .products {
+.home-section .three-products .message .products,
+.home-section .three-products-w-border .message .products {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
 }
-.home-section .three-products .message .products .product {
+.home-section .three-products .message .products .product,
+.home-section .three-products-w-border .message .products .product {
   margin-right: 0.5rem;
   margin-top: 0.5rem;
 }
-.home-section .three-products .message .products .brand {
+.home-section .three-products .message .products .brand,
+.home-section .three-products-w-border .message .products .brand {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.home-section .three-products .message .products .brand:hover {
+.home-section .three-products .message .products .brand:hover,
+.home-section .three-products-w-border .message .products .brand:hover {
   cursor: pointer;
 }
-.home-section .three-products .message .products .brand .img-container {
+.home-section .three-products .message .products .brand .img-container,
+.home-section .three-products-w-border .message .products .brand .img-container {
   min-height: 11rem;
   min-width: 11rem;
   display: flex;
@@ -5207,10 +5223,14 @@ form .uploaded-file {
   padding: 0.5rem;
   border: solid 1px #d6d6d6;
 }
-.home-section .three-products .message .products .brand .img-container img {
+.home-section .three-products .message .products .brand .img-container img,
+.home-section .three-products-w-border .message .products .brand .img-container img {
   max-height: 10rem;
   max-width: 10rem;
   object-fit: cover;
+}
+.home-section .three-products-w-border {
+  border-bottom: solid 0.5rem #0e4263;
 }
 
 /*****************************************************************************************************
@@ -5395,7 +5415,8 @@ form .uploaded-file {
     color: #0e4263;
     font-weight: bold;
   }
-  .home-section .three-products {
+  .home-section .three-products,
+.home-section .three-products-w-border {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -5404,13 +5425,15 @@ form .uploaded-file {
     min-height: 10rem;
     background-color: white;
   }
-  .home-section .three-products .message {
+  .home-section .three-products .message,
+.home-section .three-products-w-border .message {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .home-section .three-products .message .title {
+  .home-section .three-products .message .title,
+.home-section .three-products-w-border .message .title {
     width: 100%;
     font-size: 1.5rem;
     color: #0b212e;
@@ -5418,26 +5441,31 @@ form .uploaded-file {
     background-color: #0e4263;
     color: white;
   }
-  .home-section .three-products .message .products {
+  .home-section .three-products .message .products,
+.home-section .three-products-w-border .message .products {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  .home-section .three-products .message .products .product {
+  .home-section .three-products .message .products .product,
+.home-section .three-products-w-border .message .products .product {
     margin-right: 0.5rem;
     margin-top: 0.5rem;
   }
-  .home-section .three-products .message .products .brand {
+  .home-section .three-products .message .products .brand,
+.home-section .three-products-w-border .message .products .brand {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .home-section .three-products .message .products .brand:hover {
+  .home-section .three-products .message .products .brand:hover,
+.home-section .three-products-w-border .message .products .brand:hover {
     cursor: pointer;
   }
-  .home-section .three-products .message .products .brand .img-container {
+  .home-section .three-products .message .products .brand .img-container,
+.home-section .three-products-w-border .message .products .brand .img-container {
     min-height: 11rem;
     min-width: 11rem;
     display: flex;
@@ -5447,7 +5475,8 @@ form .uploaded-file {
     padding: 0.5rem;
     border: solid 1px #d6d6d6;
   }
-  .home-section .three-products .message .products .brand .img-container img {
+  .home-section .three-products .message .products .brand .img-container img,
+.home-section .three-products-w-border .message .products .brand .img-container img {
     max-height: 10rem;
     max-width: 10rem;
     object-fit: cover;
@@ -5638,7 +5667,8 @@ form .uploaded-file {
     font-weight: bold;
   }
 
-  .three-products {
+  .three-products,
+.three-products-w-border {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -5647,13 +5677,15 @@ form .uploaded-file {
     min-height: 10rem;
     background-color: white;
   }
-  .three-products .message {
+  .three-products .message,
+.three-products-w-border .message {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .three-products .message .title {
+  .three-products .message .title,
+.three-products-w-border .message .title {
     width: 100%;
     font-size: 2rem;
     color: #0b212e;
@@ -5661,26 +5693,31 @@ form .uploaded-file {
     background-color: #0e4263;
     color: white;
   }
-  .three-products .message .products {
+  .three-products .message .products,
+.three-products-w-border .message .products {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  .three-products .message .products .product {
+  .three-products .message .products .product,
+.three-products-w-border .message .products .product {
     margin-right: 0.5rem;
     margin-top: 0.5rem;
   }
-  .three-products .message .products .brand {
+  .three-products .message .products .brand,
+.three-products-w-border .message .products .brand {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .three-products .message .products .brand:hover {
+  .three-products .message .products .brand:hover,
+.three-products-w-border .message .products .brand:hover {
     cursor: pointer;
   }
-  .three-products .message .products .brand .img-container {
+  .three-products .message .products .brand .img-container,
+.three-products-w-border .message .products .brand .img-container {
     min-height: 11rem;
     min-width: 11rem;
     display: flex;
@@ -5690,7 +5727,8 @@ form .uploaded-file {
     padding: 0.5rem;
     border: solid 1px #d6d6d6;
   }
-  .three-products .message .products .brand .img-container img {
+  .three-products .message .products .brand .img-container img,
+.three-products-w-border .message .products .brand .img-container img {
     max-height: 10rem;
     max-width: 10rem;
     object-fit: cover;
@@ -5841,7 +5879,8 @@ form .uploaded-file {
     font-weight: bold;
   }
 
-  .three-products {
+  .three-products,
+.three-products-w-border {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -5850,40 +5889,49 @@ form .uploaded-file {
     min-height: 10rem;
     background-color: white;
   }
-  .three-products .message {
+  .three-products .message,
+.three-products-w-border .message {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .three-products .message .title {
+  .three-products .message .title,
+.three-products-w-border .message .title {
     width: 100%;
-    font-size: 2rem;
+    padding: 0 0.3rem;
+    font-size: 1.8rem;
+    font-weight: bold;
     color: #0b212e;
     text-align: center;
     background-color: #0e4263;
     color: white;
   }
-  .three-products .message .products {
+  .three-products .message .products,
+.three-products-w-border .message .products {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  .three-products .message .products .product {
+  .three-products .message .products .product,
+.three-products-w-border .message .products .product {
     margin-right: 0.5rem;
     margin-top: 0.5rem;
   }
-  .three-products .message .products .brand {
+  .three-products .message .products .brand,
+.three-products-w-border .message .products .brand {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .three-products .message .products .brand:hover {
+  .three-products .message .products .brand:hover,
+.three-products-w-border .message .products .brand:hover {
     cursor: pointer;
   }
-  .three-products .message .products .brand .img-container {
+  .three-products .message .products .brand .img-container,
+.three-products-w-border .message .products .brand .img-container {
     min-height: 11rem;
     min-width: 11rem;
     display: flex;
@@ -5893,7 +5941,8 @@ form .uploaded-file {
     padding: 0.5rem;
     border: solid 1px #d6d6d6;
   }
-  .three-products .message .products .brand .img-container img {
+  .three-products .message .products .brand .img-container img,
+.three-products-w-border .message .products .brand .img-container img {
     max-height: 10rem;
     max-width: 10rem;
     object-fit: cover;
@@ -7770,6 +7819,14 @@ Select Buttons
   padding: 0.5rem;
   border: solid 2px #28a745;
   border-radius: 0.2rem;
+}
+.shipping .login-options .info .item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.shipping .login-options .info .item i {
+  font-size: 0.5rem;
 }
 .shipping .login-options .options {
   width: 18rem;

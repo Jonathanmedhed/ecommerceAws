@@ -16,6 +16,9 @@ const ShippingScreen = () => {
 	const cart = useSelector((state) => state.cart)
 	const { shippingAddress } = cart
 
+	const shopDetails = useSelector((state) => state.shopDetails)
+	const { shop } = shopDetails
+
 	const [address, setAddress] = useState(shippingAddress ? shippingAddress.address : null)
 	const [city, setCity] = useState(shippingAddress ? shippingAddress.city : null)
 	const [postalCode, setPostalCode] = useState(shippingAddress ? shippingAddress.postalCode : null)
@@ -92,7 +95,18 @@ const ShippingScreen = () => {
 			<h3 className="title">
 				Prefiere <strong>retirar</strong> los productos en la tienda o que se los <strong>enviemos</strong>?
 			</h3>
-			<p className="info">Envios solo en la region central</p>
+			{shop && shop.deliveryRules && shop.deliveryRules.length > 0 && (
+				<ul className="info">
+					<li>
+						<strong>Condiciones para envío:</strong>
+					</li>
+					{shop.deliveryRules.map((rule) => (
+						<li className="item" key={rule}>
+							<i className="fas fa-circle"></i> <span className="ml-half">{rule}</span>
+						</li>
+					))}
+				</ul>
+			)}
 			<div className="options">
 				<div onClick={() => setPickup()} className="btn btn-primary">
 					<i className="fas fa-store-alt mr-half"></i> Retiro

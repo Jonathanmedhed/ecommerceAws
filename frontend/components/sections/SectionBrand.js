@@ -8,13 +8,13 @@ const SectionBrand = () => {
 		{ name: 'Sony', img: '../../static/images/sony.png' },
 	]
 	return (
-		<section className="three-products pb-2">
+		<section className="three-products-w-border">
 			<article className="message">
 				<h2 className="title">Las Mejores Marcas en Celulares y Accesorios</h2>
 				<div className="products pt-2">
 					{brands &&
 						brands.map((brand) => (
-							<div  key={brand.name}className="product">
+							<div key={brand.name} className="product">
 								<Link href={`/products-brand/${brand.name}`}>
 									<article className="brand">
 										<div className="img-container">

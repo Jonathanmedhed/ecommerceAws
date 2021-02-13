@@ -42,6 +42,7 @@ exports.createShop = asyncHandler(async (req, res) => {
 			shipmentCost: 0,
 			shipmentLimit: 0,
 			externalLink: '',
+			deliveryRules: [],
 		})
 
 		if (shop) {
@@ -90,6 +91,7 @@ exports.getShopInfo = asyncHandler(async (req, res) => {
 			shipmentCost: shops[0].shipmentCost,
 			shipmentLimit: shops[0].shipmentLimit,
 			externalLink: shops[0].externalLink,
+			deliveryRules: shops[0].deliveryRules,
 		})
 	} else {
 		res.status(404)
@@ -133,6 +135,7 @@ exports.updateShopInfo = asyncHandler(async (req, res) => {
 		shops[0].shipmentCost = req.body.shipmentCost || shops[0].shipmentCost
 		shops[0].shipmentLimit = req.body.shipmentLimit || shops[0].shipmentLimit
 		shops[0].externalLink = req.body.externalLink || shops[0].externalLink
+		shops[0].deliveryRules = req.body.deliveryRules || shops[0].deliveryRules
 
 		const updatedShop = await shops[0].save()
 
@@ -167,6 +170,7 @@ exports.updateShopInfo = asyncHandler(async (req, res) => {
 			shipmentCost: updatedShop.shipmentCost,
 			shipmentLimit: updatedShop.shipmentLimit,
 			externalLink: updatedShop.externalLink,
+			deliveryRules: updatedShop.deliveryRules,
 		})
 	} else {
 		res.status(404)

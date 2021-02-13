@@ -29,6 +29,7 @@ const ShopInfoScreen = () => {
 
 	const [rangeDays, setRangeDays] = useState('')
 	const [rangeTimes, setRangeTimes] = useState('')
+	const [deliveryRule, setDeliveryRule] = useState('')
 
 	// To check if maps script is set
 	const [mapReady, setMapReady] = useState(false)
@@ -79,6 +80,7 @@ const ShopInfoScreen = () => {
 		sections: [],
 		shipmentCost: 0,
 		shipmentLimit: 0,
+		deliveryRules: [],
 		// Mobile payment
 		mobileBank: '',
 		mobilePhone: '',
@@ -118,6 +120,7 @@ const ShopInfoScreen = () => {
 		sections,
 		shipmentCost,
 		shipmentLimit,
+		deliveryRules,
 		// Mobile payment
 		mobileBank,
 		mobilePhone,
@@ -192,6 +195,7 @@ const ShopInfoScreen = () => {
 					sections: shop.sections,
 					shipmentCost: shop.shipmentCost,
 					shipmentLimit: shop.shipmentLimit,
+					deliveryRules: shop.deliveryRules,
 					// Mobile payment
 					mobileBank: shop.mobileBank,
 					mobilePhone: shop.mobilePhone,
@@ -234,6 +238,7 @@ const ShopInfoScreen = () => {
 				sections,
 				shipmentCost,
 				shipmentLimit,
+				deliveryRules,
 				// Mobile payment
 				mobileBank,
 				mobilePhone,
@@ -405,6 +410,55 @@ const ShopInfoScreen = () => {
 					step={1}
 					onChange={(e) => onChange(e)}
 				></input>
+			</div>
+		</>
+	)
+
+	const deliveryRulesForm = () => (
+		<>
+			<div className="form-group">
+				{deliveryRules &&
+					deliveryRules.map((rule) => (
+						<div key={rule} className="opening-times">
+							<div className="opening-time">
+								<span>{rule}</span>
+							</div>
+							<div
+								onClick={() =>
+									setFormData({
+										...formData,
+										deliveryRules: deliveryRules.filter((x) => x !== rule),
+									})
+								}
+								className="btn-icon btn-danger"
+							>
+								<i className="far fa-trash-alt"></i>
+							</div>
+						</div>
+					))}
+				<label>Nueva Condición</label>
+				<input
+					type="text"
+					placeholder="ingresar condición"
+					value={deliveryRule}
+					name="deliveryRule"
+					onChange={(e) => setDeliveryRule(e.target.value)}
+				></input>
+				{deliveryRule ? (
+					<div
+						onClick={() =>
+							setFormData({
+								...formData,
+								deliveryRules: [...deliveryRules, deliveryRule],
+							})
+						}
+						className="btn-icon btn-success mt-half"
+					>
+						<i className="fas fa-plus"></i>
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 		</>
 	)
@@ -721,6 +775,11 @@ const ShopInfoScreen = () => {
 
 								<AccordionTab headerClassName="primary-tab" header="Costo de Envío">
 									{shipmentCostForm()}
+									{saveChangesButton()}
+								</AccordionTab>
+
+								<AccordionTab headerClassName="primary-tab" header="Reglas para Envío">
+									{deliveryRulesForm()}
 									{saveChangesButton()}
 								</AccordionTab>
 

@@ -112,8 +112,10 @@ const Index = () => {
 					allProducts && (
 						<>
 							{jumboComponent(shop)}
-							<SeoContent products={allProducts} shop={shop} />
-							{sections(shop)}
+							<div className="home" style={loaded ? {} : { display: 'none' }}>
+								<SeoContent products={allProducts} shop={shop} />
+								{sections(shop)}
+							</div>
 						</>
 					)
 				)}
