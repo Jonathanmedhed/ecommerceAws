@@ -4951,8 +4951,6 @@ form .uploaded-file {
   align-items: center;
   justify-content: center;
   background-color: #000000;
-  max-height: 30rem;
-  min-height: 30rem;
 }
 .home .content .home-image {
   max-height: 30rem;
@@ -5237,14 +5235,6 @@ form .uploaded-file {
 * Home Mobile
 *****************************************************************************************************/
 @media (max-width: 60rem) {
-  .home {
-    max-height: 30rem;
-    min-height: 30rem;
-  }
-  .home .content {
-    max-height: 30rem;
-    min-height: 30rem;
-  }
   .home .content .home-image {
     max-height: 30rem;
     min-height: 30rem;
@@ -5271,11 +5261,8 @@ form .uploaded-file {
     align-items: center;
     justify-content: center;
     background-color: #000000;
-    max-height: 20rem;
   }
   .home-section .content .home-image {
-    max-height: 20rem;
-    min-height: 20rem;
     object-fit: cover;
     opacity: 0.7;
   }
@@ -5483,14 +5470,6 @@ form .uploaded-file {
   }
 }
 @media (max-width: 45rem) {
-  .home {
-    max-height: 15rem;
-    min-height: 15rem;
-  }
-  .home .content {
-    max-height: 15rem;
-    min-height: 15rem;
-  }
   .home .content .home-image {
     max-height: 15rem;
     min-height: 15rem;
@@ -5517,17 +5496,12 @@ form .uploaded-file {
     align-items: center;
     justify-content: center;
     background-color: #000000;
-    max-height: 20rem;
   }
   .home-section .content .home-image {
-    max-height: 20rem;
-    min-height: 20rem;
     object-fit: cover;
     opacity: 0.7;
   }
   .home-section .content .img-alone {
-    max-height: 20rem;
-    min-height: 20rem;
     object-fit: cover;
   }
   .home-section .content .message {
@@ -5735,14 +5709,6 @@ form .uploaded-file {
   }
 }
 @media (max-width: 22.5rem) {
-  .home {
-    max-height: 30rem;
-    min-height: 30rem;
-  }
-  .home .content {
-    max-height: 30rem;
-    min-height: 30rem;
-  }
   .home .content .home-image {
     max-height: 30rem;
     min-height: 30rem;
@@ -5767,11 +5733,8 @@ form .uploaded-file {
     align-items: center;
     justify-content: center;
     background-color: #000000;
-    max-height: unset;
   }
   .home-section .content .home-image {
-    max-height: unset;
-    min-height: unset;
     object-fit: cover;
     opacity: 0.7;
   }
@@ -5901,7 +5864,7 @@ form .uploaded-file {
     width: 100%;
     padding: 0 0.3rem;
     font-size: 1.8rem;
-    font-weight: bold;
+    font-weight: 900;
     color: #0b212e;
     text-align: center;
     background-color: #0e4263;

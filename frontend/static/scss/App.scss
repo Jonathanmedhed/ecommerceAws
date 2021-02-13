@@ -1152,7 +1152,6 @@ Chart
   align-items: center;
   justify-content: center;
   background-color: $white-light-color;
-
   .section-title {
     text-transform: uppercase;
     color: $light-color;
@@ -2192,8 +2191,6 @@ form {
     align-items: center;
     justify-content: center;
     background-color: #000000;
-    max-height: 30rem;
-    min-height: 30rem;
     .home-image {
       max-height: 30rem;
       min-height: 30rem;
@@ -2473,11 +2470,7 @@ form {
 
 @media (max-width: 60rem) {
   .home {
-    max-height: 30rem;
-    min-height: 30rem;
     .content {
-      max-height: 30rem;
-      min-height: 30rem;
       .home-image {
         max-height: 30rem;
         min-height: 30rem;
@@ -2506,10 +2499,7 @@ form {
       align-items: center;
       justify-content: center;
       background-color: #000000;
-      max-height: 20rem;
       .home-image {
-        max-height: 20rem;
-        min-height: 20rem;
         object-fit: cover;
         opacity: 0.7;
       }
@@ -2713,11 +2703,7 @@ form {
 
 @media (max-width: 45rem) {
   .home {
-    max-height: 15rem;
-    min-height: 15rem;
     .content {
-      max-height: 15rem;
-      min-height: 15rem;
       .home-image {
         max-height: 15rem;
         min-height: 15rem;
@@ -2746,16 +2732,11 @@ form {
       align-items: center;
       justify-content: center;
       background-color: #000000;
-      max-height: 20rem;
       .home-image {
-        max-height: 20rem;
-        min-height: 20rem;
         object-fit: cover;
         opacity: 0.7;
       }
       .img-alone {
-        max-height: 20rem;
-        min-height: 20rem;
         object-fit: cover;
       }
       .message {
@@ -2958,11 +2939,7 @@ form {
 
 @media (max-width: 22.5rem) {
   .home {
-    max-height: 30rem;
-    min-height: 30rem;
     .content {
-      max-height: 30rem;
-      min-height: 30rem;
       .home-image {
         max-height: 30rem;
         min-height: 30rem;
@@ -2991,10 +2968,7 @@ form {
       align-items: center;
       justify-content: center;
       background-color: #000000;
-      max-height: unset;
       .home-image {
-        max-height: unset;
-        min-height: unset;
         object-fit: cover;
         opacity: 0.7;
       }
@@ -3116,7 +3090,7 @@ form {
         width: 100%;
         padding: 0 0.3rem;
         font-size: 1.8rem;
-        font-weight: bold;
+        font-weight: 900;
         color: $dark-color;
         text-align: center;
         background-color: $primary-color;
