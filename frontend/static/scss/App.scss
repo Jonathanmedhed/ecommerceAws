@@ -2895,7 +2895,8 @@ form {
       .title {
         width: 100%;
         font-size: 1.6rem;
-        font-weight: bold;
+        font-weight: bolder;
+        border: solid 2px red;
         color: $dark-color;
         text-align: center;
         background-color: $primary-color;
